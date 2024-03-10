@@ -1,0 +1,11 @@
+.homediv {
+    background: rgba(0, 0, 0, 0.7) url(../../assets/luca-bravo-XJXWbfSo2f0-unsplash.jpg);
+    background-blend-mode: darken;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    height: 84vh;
+    
+    
+
+}
