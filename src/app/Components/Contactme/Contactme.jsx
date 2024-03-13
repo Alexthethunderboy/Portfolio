@@ -16,8 +16,8 @@ const Contactme = () => {
   };
 
   return (
-    <div>
-      <div className="flex flex-col justify-center gap-5 mt-5 md:mt-20">
+    <div className="mb-20 mt-5 md:mt-20">
+      <div className="flex flex-col justify-center gap-5 ">
         <div>
           <motion.h1
             className="font-extrabold text-transparent text-6xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600"
@@ -96,7 +96,7 @@ const Contactme = () => {
               onCopy={() => setClipboardState(true)}
             >
               <button onClick={{ changeIcon }}>
-                {clipboardState ? <TiTick /> : <FaClone />}
+                {clipboardState ? <TiTick className="text-xl"/> : <FaClone />}
               </button>
             </CopyToClipboard>
           </div>
