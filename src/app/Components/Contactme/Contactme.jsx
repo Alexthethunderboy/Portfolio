@@ -25,7 +25,7 @@ const Contactme = () => {
             animate={{ scale: 1 }}
             transition={{ delay: 1, duration: 2 }}
           >
-            Hello, <br /> Lets connect
+            Hello, <br /> Let&#8217;s connect
           </motion.h1>
         </div>
 
