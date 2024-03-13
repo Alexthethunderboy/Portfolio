@@ -15,9 +15,13 @@ const Navbar = () => {
   return (
     <div className='bg-gradient-to-r from-black to-blue-500 '>
         <nav className='flex justify-between md:p-10 p-5 bg-transparent text-white items-center '>
-            <div>
+            <motion.div
+            initial={{x: '-100vw'}}
+            animate={{x: 0}}
+            transition={{ delay: 2, duration: 5, type: 'spring', stiffness: 120}}
+            >
                 <Link href={'/'}><Image src={icon} alt='lightning icon' width={150}/></Link>
-            </div>
+            </motion.div>
             <div className='md:hidden'>
                 {show && (
                     <motion.ul className='flex flex-col gap-10 absolute top-16 right-0 z-40 bg-gradient-to-r from-black to-blue-500 items-center w-screen py-10'
@@ -44,9 +48,9 @@ const Navbar = () => {
 
             </div>
             <motion.div className='text-xl md:hidden cursor-pointer' onClick={handleShow}
-             initial={{y: '-100vh'}}
-             animate={{y: 0}}
-             transition={{ delay: 2, duration: 2, type: 'spring', stiffness: 200}}
+             initial={{x: '100vw'}}
+             animate={{x: 0}}
+             transition={{ delay: 3, duration: 5, type: 'spring', stiffness: 120}}
              whileHover={{ scale: 1.1 }}
              whileTap={{ scale: 0.9 }}
             
