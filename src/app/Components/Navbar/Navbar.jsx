@@ -24,7 +24,7 @@ const Navbar = () => {
             </motion.div>
             <div className='md:hidden'>
                 {show && (
-                    <motion.ul className='flex flex-col gap-10 absolute top-16 right-0 z-40 bg-gradient-to-r from-black to-blue-500 items-center w-screen py-10'
+                    <motion.ul className='flex flex-col gap-10 absolute top-16 right-0 z-50 bg-gradient-to-r from-black to-blue-500 items-center w-screen py-10'
                     initial={{x: '-100vw'}}
                     animate={{x: 0}}
                     >
@@ -51,11 +51,11 @@ const Navbar = () => {
              initial={{ x: 0 }}
              animate={{
                 scale: [1, 2, 2, 1, 1],
-                rotate: [0, 0, 270, 270, 0],
+                // rotate: [0, 0, 270, 270, 0],
                 borderRadius: ["20%", "20%", "50%", "50%", "20%"],
               }}
             //  transition={{ delay: 3, duration: 5, type: 'spring', stiffness: 120}}
-            transition={{ repeat: Infinity, repeatDelay: 5, duration: 2}}
+            transition={{ repeat: Infinity, repeatDelay: 5, duration: 1}}
             >
                 <FaHamburger/>
             </motion.div>

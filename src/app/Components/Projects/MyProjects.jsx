@@ -45,7 +45,7 @@ export const MyProjects = () => {
         // className='  w-[60%] h-[40%]'
       >
         <SwiperSlide className=" ">
-          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row w-[60vw] mx-auto items-center justify-center">
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[65vw] mx-auto items-center justify-center">
             <div className="basis-1/2 relative">
               <a href='https://blogg-sigma-indol.vercel.app/' target="_blank">
               {show && (
@@ -86,9 +86,9 @@ export const MyProjects = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className=" ">
-          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row w-[60vw] mx-auto items-center justify-center">
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[60vw] mx-auto items-center justify-center">
             <div className="basis-1/2 relative">
-            <a href='https://insureproject.vercel.app/' targer="_blank">
+            <a href='https://insureproject.vercel.app/' target="_blank">
 
               {show && (
               <Image
@@ -128,7 +128,7 @@ export const MyProjects = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className=" ">
-          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row w-[60vw] mx-auto items-center justify-center">
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[60vw] mx-auto items-center justify-center">
             <div className="basis-1/2 relative">
             <a href='https://new-ecommerce-seven.vercel.app/' target="_blank">
               {show && (
@@ -169,7 +169,7 @@ export const MyProjects = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide className=" ">
-          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row w-[60vw] mx-auto items-center justify-center">
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[60vw] mx-auto items-center justify-center">
             <div className="basis-1/2 relative">
             <a href='https://sunny-three.vercel.app/' target="_blank">
 
@@ -192,7 +192,7 @@ export const MyProjects = () => {
             </div>
             <div class="basis-1/2 p-4 h-80 md:h-23 ">
             <Bar
-            className="w-60 md:h:61"
+            className="w-50  md:h:61 md:w-61"
               data={{
                 labels: ['HTML', 'SASS', 'Bootstrap', 'JavaScript'],
                 datasets: [
@@ -213,7 +213,7 @@ export const MyProjects = () => {
         </SwiperSlide>
        
       </Swiper>
-      <div className="flex items-center justify-center gap-1 md:py-2 py-1 bg-black w-[100%] h-auto active:text-blue-900  hover:text-white cursor-pointer absolute md:bottom-[-52%] bottom-20 z-40" onClick={handleShow}>
+      <div className="flex items-center justify-center gap-1 md:py-2 py-1 bg-black w-[100%] h-auto active:text-blue-900  hover:text-white cursor-pointer absolute md:bottom-[-52%] z-40" onClick={handleShow}>
                 <div className=" cursor-pointer text-md flex items-center justify-center">
                   <FaDesktop className="w-[100%] h-auto px-1"/>
                 </div>
