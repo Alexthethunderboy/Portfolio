@@ -48,12 +48,14 @@ const Navbar = () => {
 
             </div>
             <motion.div className='text-xl md:hidden cursor-pointer' onClick={handleShow}
-             initial={{x: '100vw'}}
-             animate={{x: 0}}
-             transition={{ delay: 3, duration: 5, type: 'spring', stiffness: 120}}
-             whileHover={{ scale: 1.1 }}
-             whileTap={{ scale: 0.9 }}
-            
+             initial={{ x: 0 }}
+             animate={{
+                scale: [1, 2, 2, 1, 1],
+                rotate: [0, 0, 270, 270, 0],
+                borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+              }}
+            //  transition={{ delay: 3, duration: 5, type: 'spring', stiffness: 120}}
+            transition={{ repeat: Infinity, repeatDelay: 5, duration: 2}}
             >
                 <FaHamburger/>
             </motion.div>

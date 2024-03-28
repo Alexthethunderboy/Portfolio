@@ -18,7 +18,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { FaArrowsAltH, FaDesktop, FaHome, FaMobile } from "react-icons/fa";
-// import { ImgSwipe } from '../Projects/ImgSwipe';
+import { Chart as ChartJs } from "chart.js/auto";
+import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
+
+
 
 export const MyProjects = () => {
   const [show, setShow] = useState();
@@ -61,7 +64,25 @@ export const MyProjects = () => {
               />
               </a>
             </div>
-            <div class="basis-1/2"></div>
+            <div class="basis-1/2 p-4 h-80 md:h-23 ">
+            <Bar
+            className="w-60 md:h:61"
+              data={{
+                labels: ['Next.js', 'Tailwind', 'NextAuth'],
+                datasets: [
+                  {
+                    label: "Percentage of usage",
+                    data: [60, 35, 5],
+                    backgroundColor: [
+                      "rgba(114, 12, 179, 1)",
+                      "rgba(41, 8, 118, 1)",
+                      "rgba(107, 8, 118, 1)",
+                    ]
+                  },
+                ]
+              }}
+            />
+            </div>
           </div>
         </SwiperSlide>
         <SwiperSlide className=" ">
@@ -85,7 +106,25 @@ export const MyProjects = () => {
               />
               </a>
             </div>
-            <div class="basis-1/2"></div>
+            <div class="basis-1/2 p-4 h-80 md:h-23 ">
+            <Bar
+            className="w-60 md:h:61"
+              data={{
+                labels: ['HTML', 'CSS', 'JavaScript'],
+                datasets: [
+                  {
+                    label: "Percentage of usage",
+                    data: [60, 35, 5],
+                    backgroundColor: [
+                      "rgba(114, 12, 179, 1)",
+                      "rgba(41, 8, 118, 1)",
+                      "rgba(107, 8, 118, 1)",
+                    ]
+                  },
+                ]
+              }}
+            />
+            </div>
           </div>
         </SwiperSlide>
         <SwiperSlide className=" ">
@@ -108,7 +147,25 @@ export const MyProjects = () => {
               />
               </a>
             </div>
-            <div class="basis-1/2"></div>
+            <div class="basis-1/2 p-4 h-80 md:h-23 ">
+            <Bar
+            className="w-60 md:h:61"
+              data={{
+                labels: ['HTML', 'CSS', 'JavaScript'],
+                datasets: [
+                  {
+                    label: "Percentage of usage",
+                    data: [60, 35, 5],
+                    backgroundColor: [
+                      "rgba(114, 12, 179, 1)",
+                      "rgba(41, 8, 118, 1)",
+                      "rgba(107, 8, 118, 1)",
+                    ]
+                  },
+                ]
+              }}
+            />
+            </div>
           </div>
         </SwiperSlide>
         <SwiperSlide className=" ">
@@ -133,12 +190,30 @@ export const MyProjects = () => {
               />
               </a>
             </div>
-            <div class="basis-1/2"></div>
+            <div class="basis-1/2 p-4 h-80 md:h-23 ">
+            <Bar
+            className="w-60 md:h:61"
+              data={{
+                labels: ['HTML', 'SASS', 'Bootstrap', 'JavaScript'],
+                datasets: [
+                  {
+                    label: "Percentage of usage",
+                    data: [60, 10, 25, 5],
+                    backgroundColor: [
+                      "rgba(114, 12, 179, 1)",
+                      "rgba(41, 8, 118, 1)",
+                      "rgba(107, 8, 118, 1)",
+                    ]
+                  },
+                ]
+              }}
+            />
+            </div>
           </div>
         </SwiperSlide>
        
       </Swiper>
-      <div className="flex items-center justify-center gap-1 md:py-2 py-1 bg-black w-[100%] h-auto active:text-blue-900  hover:text-white cursor-pointer absolute md:bottom-[-52%] bottom-10 z-40" onClick={handleShow}>
+      <div className="flex items-center justify-center gap-1 md:py-2 py-1 bg-black w-[100%] h-auto active:text-blue-900  hover:text-white cursor-pointer absolute md:bottom-[-52%] bottom-20 z-40" onClick={handleShow}>
                 <div className=" cursor-pointer text-md flex items-center justify-center">
                   <FaDesktop className="w-[100%] h-auto px-1"/>
                 </div>
