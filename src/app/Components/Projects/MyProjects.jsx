@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import mock1 from "@/assets/mockup1.png";
+import mock1_0 from "@/assets/mockup1-0.png";
 import mock2 from "@/assets/mockup2.png";
 import mock3 from "@/assets/mockup3.png";
 import mock from "@/assets/mockup.png";
 import mockM1 from "@/assets/mockM1.png";
+import mockM1_0 from "@/assets/mockM1-0.png";
 import mockM2 from "@/assets/mockM2.png";
 import mockM3 from "@/assets/mockM3.png";
 import mockM4 from "@/assets/mockM4.png";
@@ -44,6 +46,47 @@ export const MyProjects = () => {
         onSlideChange={() => console.log("slide change")}
         // className='  w-[60%] h-[40%]'
       >
+        <SwiperSlide className=" ">
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[65vw] mx-auto items-center justify-center">
+            <div className="basis-1/2 relative">
+              <a href='https://thunderweather.vercel.app/' target="_blank">
+              {show && (
+              <Image
+                className="rounded-t-lg absolute top-0 "
+                src={mockM1_0}
+                alt=""
+                objectFit="cover"
+              />
+              )}
+              <Image
+                className="rounded-t-lg"
+                src={mock1_0}
+                alt=""
+                objectFit="cover"
+              />
+              </a>
+            </div>
+            <div class="basis-1/2 p-4 h-80 md:h-23 ">
+            <Bar
+            className="w-60 md:h:61"
+              data={{
+                labels: ['Next.js', 'Tailwind', 'TypeScript'],
+                datasets: [
+                  {
+                    label: "Percentage of usage",
+                    data: [40, 15, 45],
+                    backgroundColor: [
+                      "rgba(114, 12, 179, 1)",
+                      "rgba(41, 8, 118, 1)",
+                      "rgba(107, 8, 118, 1)",
+                    ]
+                  },
+                ]
+              }}
+            />
+            </div>
+          </div>
+        </SwiperSlide>
         <SwiperSlide className=" ">
           <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[65vw] mx-auto items-center justify-center">
             <div className="basis-1/2 relative">
