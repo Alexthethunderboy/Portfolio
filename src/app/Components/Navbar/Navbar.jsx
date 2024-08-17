@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import icon from '@/assets/thunderboyIcon.png'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { FaHamburger } from 'react-icons/fa'
+import { FaBars, FaHamburger, FaTimes } from 'react-icons/fa'
 
 
 const Navbar = () => {
     const [show, setShow] = useState();
+    const [ change, setChange] = useState()
     const handleShow = () => {
+        setChange(!change);
         setShow(!show);
     }
   return (
@@ -18,7 +20,7 @@ const Navbar = () => {
             <motion.div
             initial={{x: '-100vw'}}
             animate={{x: 0}}
-            transition={{ delay: 2, duration: 5, type: 'spring', stiffness: 120}}
+            transition={{ delay: 0, duration: 5, type: 'spring', stiffness: 120}}
             >
                 <Link href={'/'}><Image src={icon} alt='lightning icon' width={150}/></Link>
             </motion.div>
@@ -47,18 +49,10 @@ const Navbar = () => {
                 </ul>
 
             </div>
-            <motion.div className='text-xl md:hidden cursor-pointer' onClick={handleShow}
-             initial={{ x: 0 }}
-             animate={{
-                scale: [1, 2, 2, 1, 1],
-                // rotate: [0, 0, 270, 270, 0],
-                borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-              }}
-            //  transition={{ delay: 3, duration: 5, type: 'spring', stiffness: 120}}
-            transition={{ repeat: Infinity, repeatDelay: 5, duration: 1}}
-            >
-                <FaHamburger/>
-            </motion.div>
+            <div className='text-2xl md:hidden cursor-pointer' onClick={handleShow}>
+            {change? <FaTimes/> : <FaBars/>}
+               
+            </div>
             <div className='hidden md:block'>
             <Link href={'/contact'}><button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-semibold">Hire me!</button></Link>   
             
