@@ -29,7 +29,7 @@ const Homepage = () => {
           Passionate front-end developer with a flair for creating seamless web
           experiences. Combining technical prowess with creativity.
         </motion.p>
-        <motion.a href="/myResume33.pdf" download='KelechiugohResume.pdf'
+        <motion.a href="/myresume.pdf" download='KelechiugohResume.pdf'
           initial={{ y: '100vh' }}
           animate={{ y: 0}}
           transition={{ delay: 6, duration: 4, type: 'spring', stiffness: 200}}

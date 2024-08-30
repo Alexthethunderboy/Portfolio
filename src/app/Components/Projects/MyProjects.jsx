@@ -33,7 +33,7 @@ export const MyProjects = () => {
   };
 
   return (
-    <div className="mx-auto my-10 flex text-white h-auto">
+    <div className="mx-auto my-10 flex flex-col text-white h-auto p-5">
       <Swiper
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -44,7 +44,7 @@ export const MyProjects = () => {
         scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
-        // className='  w-[60%] h-[40%]'
+        className='  w-full'
       >
         <SwiperSlide className=" ">
           <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[65vw] mx-auto items-center justify-center">
@@ -66,9 +66,9 @@ export const MyProjects = () => {
               />
               </a>
             </div>
-            <div class="basis-1/2 p-4 h-80 md:h-23 ">
+            <div class="basis-1/2 p-4 h-80 md:h-23 w-auto">
             <Bar
-            className="w-60 md:h:61"
+            className="md:h:61"
               data={{
                 labels: ['Next.js', 'Tailwind', 'TypeScript'],
                 datasets: [
@@ -90,7 +90,7 @@ export const MyProjects = () => {
         <SwiperSlide className=" ">
           <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row md:w-[65vw] mx-auto items-center justify-center">
             <div className="basis-1/2 relative">
-              <a href='https://blogg-sigma-indol.vercel.app/' target="_blank">
+              <a href='https://new-blog-deploy.vercel.app' target="_blank">
               {show && (
               <Image
                 className="rounded-t-lg absolute top-0 "
@@ -256,7 +256,7 @@ export const MyProjects = () => {
         </SwiperSlide>
        
       </Swiper>
-      <div className="flex items-center justify-center gap-1 md:py-2 py-1 bg-black w-[100%] h-auto active:text-blue-900  hover:text-white cursor-pointer absolute md:bottom-[-52%] z-40" onClick={handleShow}>
+      <div className="flex items-center justify-center gap-1 md:py-2 py-1 bg-black w-auto h-auto active:text-blue-900  hover:text-white cursor-pointer a md:bottom-[-52%] z-40" onClick={handleShow}>
                 <div className=" cursor-pointer text-md flex items-center justify-center">
                   <FaDesktop className="w-[100%] h-auto px-1"/>
                 </div>

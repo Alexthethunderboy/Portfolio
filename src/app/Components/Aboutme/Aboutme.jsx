@@ -14,7 +14,7 @@ const Aboutme = () => {
     >
       <div class="max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col md:flex-row ">
         <div className="basis-1/2">
-            <Image class="rounded-t-lg" src={pic} alt="" objectFit="cover" className="md:w-[100%]"/>
+            {/* <Image class="rounded-t-lg" src={pic} alt="" objectFit="cover" className="md:w-[100%]"/> */}
         </div>
         <div class="p-5 flex gap-2 flex-col items-center text-center justify-between basis-1/2">
           
