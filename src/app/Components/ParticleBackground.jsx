@@ -108,7 +108,7 @@ const ParticleBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full opacity-40"
+      className="absolute top-0 left-0 w-full h-full md:opacity-70 opacity-40"
       style={{ pointerEvents: 'none' }}
     />
   );

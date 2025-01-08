@@ -34,29 +34,6 @@ body {
     text-wrap: balance;
   }
 }
-@media (max-width: 2560px) {
-  canvas {
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 5); /* Adjust opacity as needed */
-  }
-}
 
-@media (max-width: 768px) {
-  canvas {
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 5); /* Adjust opacity as needed */
-    
-  }
-  /* cc-blur {
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.5); 
-  } */
-  .blur-mobile {
-    backdrop-filter: blur(5px); /* Applies the blur effect */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    border-radius: 0.5rem; /* Optional: Rounded corners */
-    padding: 1rem; /* Optional: Padding for spacing */
-  }
-}
 
 
