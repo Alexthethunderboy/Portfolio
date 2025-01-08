@@ -1,8 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ParticleBackground from "./Components/ParticleBackground";
-
+import ParticleBackground from "./ParticleBackground";
 
 const Homepage = () => {
   const [textIndex, setTextIndex] = useState(0);
@@ -17,7 +16,7 @@ const Homepage = () => {
   }, [texts.length]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden ">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-900 to-purple-900">
       <ParticleBackground />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-5 text-center z-10">
         <motion.h1 

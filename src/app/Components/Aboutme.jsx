@@ -1,8 +1,9 @@
 'use client'
 import React from "react";
 import Image from "next/image";
+import pic from "@/assets/profile-pic.png";
 import { motion } from "framer-motion";
-import { FaCode, FaLightbulb, FaPuzzlePiece, FaPersonBooth } from "react-icons/fa";
+import { FaCode, FaLightbulb, FaPuzzlePiece } from "react-icons/fa";
 import {
   IoLogoCss3,
   IoLogoHtml5,
@@ -38,7 +39,7 @@ const AboutMe = () => {
             transition={{ delay: 0.2, duration: 0.8 }}
           >
             <Image 
-              src={<FaPersonBooth/>}
+              src={pic} 
               alt="Profile Picture" 
               width={400} 
               height={400} 
@@ -50,7 +51,7 @@ const AboutMe = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="space-y-6 blur-mobile"
+            className="space-y-6 "
           >
             <h1 className="text-4xl font-bold mb-4">About Me</h1>
             <p className="text-lg">
@@ -68,7 +69,7 @@ const AboutMe = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          {[ 
+          {[
             { icon: FaCode, title: "Clean Code", description: "Writing efficient, maintainable, and readable code" },
             { icon: FaLightbulb, title: "Innovative Solutions", description: "Crafting creative solutions to complex problems" },
             { icon: FaPuzzlePiece, title: "Continuous Learning", description: "Always expanding my skills and knowledge" }
@@ -80,45 +81,49 @@ const AboutMe = () => {
             </div>
           ))}
         </motion.div>
+
+        
       </motion.div>
-      <section className="mt-20 py-20 bg-gradient-to-r from-gray-800 to-blue-800 rounded-3xl shadow-2xl">
-        <div className="container mx-auto px-4">
-          <motion.h2 
-            className="text-5xl md:text-7xl font-extrabold text-center mb-12"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-              My Skills
-            </span>
-          </motion.h2>
-          <motion.p 
-            className="text-xl text-center max-w-3xl mx-auto mb-16 text-gray-300"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            I&apos;ve honed my skills in essential languages, frameworks, and libraries while staying current with the latest technologies.
-          </motion.p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-gray-700 to-blue-700 rounded-xl backdrop-filter backdrop-blur-lg hover:from-gray-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
+       <section className="mt-20 py-20 bg-gradient-to-r from-gray-800 to-blue-800 rounded-3xl shadow-2xl">
+            <div className="container mx-auto px-4">
+              <motion.h2 
+                className="text-5xl md:text-7xl font-extrabold text-center mb-12"
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.8 }}
               >
-                <skill.icon className={`text-6xl mb-4 ${skill.color}`} />
-                <h3 className="text-xl font-semibold">{skill.name}</h3>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+                  My Skills
+                </span>
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-center max-w-3xl mx-auto mb-16 text-gray-300"
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                I&apos;ve honed my skills in essential languages, frameworks, and libraries while staying current with the latest technologies.
+              </motion.p>
+      
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-gray-700 to-blue-700 rounded-xl backdrop-filter backdrop-blur-lg hover:from-gray-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
+                    initial={{ y: 50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <skill.icon className={`text-6xl mb-4 ${skill.color}`} />
+                    <h3 className="text-xl font-semibold">{skill.name}</h3>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
     </div>
   );
 };
 
 export default AboutMe;
+
