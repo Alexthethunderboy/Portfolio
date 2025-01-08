@@ -31,7 +31,7 @@ const AboutMe = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20 ">
           <motion.div
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -42,7 +42,7 @@ const AboutMe = () => {
               alt="Profile Picture" 
               width={400} 
               height={400} 
-              className="rounded-full shadow-2xl border-4 border-purple-500"
+              className="rounded-full w-[290px] md:w-[400px] shadow-2xl border-4 border-purple-500"
             />
           </motion.div>
           

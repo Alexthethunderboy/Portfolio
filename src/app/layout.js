@@ -13,10 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-<body className={`${inter.className} relative min-h-screen bg-gradient-to-br from-gray-900 to-blue-900`}>
-        <ParticleBackground  />
+<body className={`${inter.className} relative min-h-screen `}>
+        <ParticleBackground className='' />
         <Navbar />
-        <div className="relative z-10">
+        <div className="relative z-10 cc-blur">
           {children}
         </div>
       </body>
