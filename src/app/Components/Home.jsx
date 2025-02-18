@@ -55,8 +55,8 @@ const Homepage = () => {
           transition={{ delay: 2.5, duration: 0.8, type: 'spring', stiffness: 200 }}
         >
           <a 
-            href="/myresume.pdf" 
-            download='KelechiugohResume.pdf'
+            href="/mainresume.pdf" 
+            download='KelechiUgohResume.pdf'
             className="relative inline-flex items-center justify-center p-1 mb-2 me-2 overflow-hidden text-lg font-semibold text-gray-900 rounded-full group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             <span className="relative px-8 py-3 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0">

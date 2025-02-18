@@ -12,12 +12,18 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Import project images
 import mock1 from "@/assets/mockup1.png";
-import mock1_0 from "@/assets/mockup1-0.png";
+import mock1_0 from "@/assets/5.png";
+import shopD from "@/assets/6.png";
+import shopM from "@/assets/4.png";
+import spotD from "@/assets/7.png";
+import spotM from "@/assets/3.png";
+import jrunM from "@/assets/2.png";
+import jrunD from "@/assets/8.png";
 import mock2 from "@/assets/mockup2.png";
 import mock3 from "@/assets/mockup3.png";
 import mock from "@/assets/mockup.png";
 import mockM1 from "@/assets/mockM1.png";
-import mockM1_0 from "@/assets/mockM1-0.png";
+import mockM1_0 from "@/assets/1.png";
 import mockM2 from "@/assets/mockM2.png";
 import mockM3 from "@/assets/mockM3.png";
 import mockM4 from "@/assets/mockM4.png";
@@ -28,13 +34,40 @@ export const MyProjects = () => {
 
   const projects = [
     {
+      name: "Shopper",
+      description: "A modern, full-stack e-commerce platform.",
+      desktopImage: shopD,
+      mobileImage: shopM,
+      link: "https://shopper-chi-six.vercel.app/",
+      github: "https://github.com/Alexthethunderboy/shopper",
+      technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Prisma", "Shadcn UI"],
+    },
+    {
+      name: "JRUN",
+      description: "JRun is a platform that connects clients with service providers for various tasks such as cleaning, laundry, car wash, and more. ",
+      desktopImage: jrunD,
+      mobileImage: jrunM,
+      link: "https://jrun-nu.vercel.app/",
+      github: "https://github.com/Alexthethunderboy/JRUN",
+      technologies: ["Next.js", "Tailwind CSS", "MongoDb", "NextAuth"],
+    },
+    {
       name: "Weather App",
       description: "A modern weather application with real-time updates and intuitive UI.",
       desktopImage: mock1_0,
       mobileImage: mockM1_0,
       link: "https://thunderweather.vercel.app/",
-      github: "https://github.com/yourusername/weather-app",
-      technologies: ["Next.js", "Tailwind CSS", "TypeScript"],
+      github: "https://github.com/Alexthethunderboy/weatherApp",
+      technologies: ["Next.js", "Tailwind CSS", "TypeScript", "OpenweatherAPI"],
+    },
+    {
+      name: "Spotify Playlist Generator",
+      description: "Music Playlist Generator is a web application that allows users to create personalized playlists based on their musical preferences.",
+      desktopImage: spotD,
+      mobileImage: spotM,
+      link: "https://playlistgenerator.vercel.app/",
+      github: "https://github.com/Alexthethunderboy/playlistgenerator",
+      technologies: ["Next.js", "Tailwind CSS", "Spotify API"],
     },
     {
       name: "Blog Platform",

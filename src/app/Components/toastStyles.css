@@ -1,18 +1,20 @@
-@import "react-toastify/dist/ReactToastify.css";
-
-.Toastify {
-  z-index: 9999; /* Ensure the toast is on top */
+.toast-container {
+  position: relative;
+  top: 60px;
+  right: 20px;
+  z-index: 9999;
 }
 
-.Toastify__toast {
-  background-color: #333; /* Dark background for the toast */
-  color: #fff; /* White text for contrast */
+.Toastify__toast-theme--dark {
+  background-color: #333;
+  color: white;
 }
 
 .Toastify__toast--success {
-  background-color: #4caf50; /* Green background for success */
+  background-color: #28a745;
 }
 
 .Toastify__toast--error {
-  background-color: #f44336; /* Red background for error */
+  background-color: #dc3545;
 }
+

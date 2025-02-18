@@ -1,62 +1,81 @@
-"use client";
+"use client"
 
-import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import './toastStyles.css';
+import { useRef, useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import emailjs from "@emailjs/browser"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import "./toastStyles.css"
 
 const Form = () => {
-  const notify = () => toast.success('Message sent successfully!', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  });
-
   const [formData, setFormData] = useState({
     user_name: "",
     user_l_name: "",
     user_email: "",
-    message: ""
-  });
+    message: "",
+  })
 
-  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const form = useRef()
+
+  // Initialize EmailJS with your public key
+  useEffect(() => {
+    emailjs.init("7iXe6bVRtr4aLWbG_")
+  }, [])
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const sendEmail = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
 
-    emailjs
-      .sendForm("service_tzcu777", "template_4ao44pg", form.current, {
-        publicKey: "7iXe6bVRtr4aLWbG_",
+    try {
+      const templateParams = {
+        user_name: formData.user_name,
+        user_l_name: formData.user_l_name,
+        user_email: formData.user_email,
+        message: formData.message,
+      }
+
+      const result = await emailjs.send("service_xdrw10j", "template_4ao44pg", templateParams)
+
+      if (result.status === 200) {
+        toast.success("Message sent successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        })
+
+        setFormData({
+          user_name: "",
+          user_l_name: "",
+          user_email: "",
+          message: "",
+        })
+      }
+    } catch (error) {
+      console.error("FAILED...", error)
+      toast.error(error.text || "Failed to send message. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       })
-      .then(
-        () => {
-          console.log("SUCCESS!");
-          notify();
-          setFormData({
-            user_name: "",
-            user_l_name: "",
-            user_email: "",
-            message: ""
-          });
-        },
-        (error) => {
-          console.error("FAILED...", error.text);
-          toast.error(`Failed to send message: ${error.text}`);
-          toast.error('Failed to send message. Please try again.');
-        }
-      );
-  };
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <motion.div
@@ -112,14 +131,15 @@ const Form = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="w-full py-3 px-6 text-white font-semibold rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50 transition-all duration-300"
+          disabled={isSubmitting}
         >
-          Send Message
+          {isSubmitting ? "Sending..." : "Send Message"}
         </motion.button>
       </form>
       <ToastContainer />
     </motion.div>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form
 
