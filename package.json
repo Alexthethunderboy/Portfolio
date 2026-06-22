@@ -15,6 +15,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
     "chart.js": "^4.4.2",
+    "cheerio": "^1.2.0",
     "framer-motion": "^11.0.8",
     "next": "^14.2.22",
     "next-sanity": "^9.12.3",

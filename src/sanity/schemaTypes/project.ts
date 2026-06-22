@@ -1,3 +1,5 @@
+import { LiveUrlWithOgImageInput } from '../components/LiveUrlWithOgImageInput';
+
 export const projectSchema = {
   name: 'project',
   title: 'Project',
@@ -42,9 +44,13 @@ export const projectSchema = {
       name: 'liveUrl',
       title: 'Live URL',
       type: 'url',
+      components: {
+        input: LiveUrlWithOgImageInput,
+      },
     },
     {
       name: 'githubUrl',
+
       title: 'GitHub URL',
       type: 'url',
     },
