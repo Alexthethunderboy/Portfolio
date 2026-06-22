@@ -3,37 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background: #09090b; /* zinc-950 */
+  --foreground: #fafafa; /* zinc-50 */
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
 
 body {
-  /* color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
-  
-    margin: 0 auto;
-    background: #000;
+  @apply bg-obsidian text-metallic font-sans antialiased overflow-x-hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 1. Liquid Glass Core Utilities */
+.liquid-glass {
+  @apply backdrop-blur-xl bg-white/[0.06] border border-white/[0.12] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)];
 }
 
+.liquid-glass-glow {
+  @apply ring-1 ring-white/[0.05];
+}
 
+/* 2. Liquid Glass Interactive State */
+.liquid-glass-interactive {
+  @apply transition-all duration-300;
+}
 
+.liquid-glass-interactive:hover {
+  @apply bg-white/[0.1] border-white/[0.2];
+}
+
+/* 3. Typography Helpers */
+.liquid-heading {
+  @apply font-sans font-extrabold tracking-tight;
+}
+
+.liquid-mono {
+  @apply font-mono text-[0.75rem] text-zinc-400 uppercase tracking-[0.1em];
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-obsidian;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-carbon border border-white/10 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-silver;
+}
