@@ -10,7 +10,7 @@ const MotionDiv: any = motion.div;
 const MENU_ITEMS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/work', label: 'Work' },
+  { href: '/projects', label: 'Projects' },
   { href: '/contact', label: 'Contact' },
 ];
 

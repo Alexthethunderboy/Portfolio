@@ -1,5 +1,5 @@
 import React from 'react';
-import WorkContent from './WorkContent';
+import ProjectList from '@/components/ui/ProjectList';
 import { client } from '@/sanity/lib/client';
 import { Project } from '@/data/portfolio';
 
@@ -7,7 +7,7 @@ import { urlForImage } from '@/sanity/lib/image';
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
-export default async function WorkPage() {
+export default async function ProjectsPage() {
   const query = `*[_type == "project"] | order(_createdAt desc) {
     _id,
     title,
@@ -35,5 +35,5 @@ export default async function WorkPage() {
     star: p.star || { situation: '', task: '', action: '', result: '' }
   }));
 
-  return <WorkContent projects={projects} />;
+  return <ProjectList projects={projects} />;
 }
