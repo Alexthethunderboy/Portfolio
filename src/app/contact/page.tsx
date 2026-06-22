@@ -103,6 +103,7 @@ const ContactPage = () => {
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Full Name</label>
                   <input
                     type="text"
+                    name="user_name"
                     required
                     placeholder="John Doe"
                     className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-purple-500/50 transition-colors text-white"
@@ -112,6 +113,7 @@ const ContactPage = () => {
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Email Address</label>
                   <input
                     type="email"
+                    name="user_email"
                     required
                     placeholder="john@example.com"
                     className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl outline-none focus:border-purple-500/50 transition-colors text-white"
@@ -122,6 +124,7 @@ const ContactPage = () => {
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">Your Message</label>
                 <textarea
+                  name="message"
                   rows={5}
                   required
                   placeholder="What are we building today?"
