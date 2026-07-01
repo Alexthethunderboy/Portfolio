@@ -1,8 +1,8 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { Project } from '@/data/portfolio';
 import { cn } from '@/lib/utils';
 
@@ -12,28 +12,7 @@ interface ProjectListProps {
 
 const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Springs for smooth cursor tracking
-  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
-  const cursorX = useSpring(0, springConfig);
-  const cursorY = useSpring(0, springConfig);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Calculate position relative to viewport
-      cursorX.set(e.clientX - 150); // Offset by half image width (300/2)
-      cursorY.set(e.clientY - 100); // Offset by half image height (200/2)
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [cursorX, cursorY]);
-
-  const toggleExpand = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
 
   return (
     <div className="container mx-auto px-4 py-24 md:py-32" ref={containerRef}>
@@ -54,7 +33,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
         >
           <p className="text-silver text-lg md:text-xl leading-relaxed max-w-2xl">
             A focus on performance, accessibility, and robust engineering. 
-            Click on any project to expand its technical details and case study.
+            Scroll down to view technical details and case studies for each project.
           </p>
         </motion.div>
       </div>
@@ -66,108 +45,35 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
         </div>
       ) : (
         <div className="relative flex flex-col w-full border-t border-white/10">
-          {/* Floating Image Cursor */}
-          <motion.div
-            className="pointer-events-none fixed z-50 overflow-hidden rounded-xl border border-white/20 shadow-2xl hidden md:block"
-            style={{
-              x: cursorX,
-              y: cursorY,
-              width: 300,
-              height: 200,
-              opacity: hoveredIndex !== null && expandedIndex === null ? 1 : 0,
-              scale: hoveredIndex !== null && expandedIndex === null ? 1 : 0.8,
-            }}
-            transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.2 } }}
-          >
-            <AnimatePresence mode="wait">
-              {hoveredIndex !== null && (
-                <motion.div
-                  key={hoveredIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="w-full h-full relative"
-                >
-                  <Image
-                    src={projects[hoveredIndex].thumbnail}
-                    alt={projects[hoveredIndex].title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-neon-primary/20 mix-blend-overlay" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
           {projects.map((project, index) => {
             const isHovered = hoveredIndex === index;
-            const isExpanded = expandedIndex === index;
 
             return (
               <div 
                 key={project.id}
-                className="group border-b border-white/10 relative"
+                className="group border-b border-white/10 relative pb-12"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 {/* List Item Header */}
-                <button
-                  onClick={() => toggleExpand(index)}
-                  className="w-full py-8 md:py-12 flex flex-col md:flex-row items-start md:items-center justify-between text-left relative z-10"
-                >
-                  <div className="flex flex-col relative z-10">
+                <div className="w-full py-8 md:py-12 flex flex-col items-start text-left relative z-10">
+                  <div className="flex flex-col relative z-10 w-full mb-6">
                     <span className="text-neon-primary text-xs tracking-[0.2em] uppercase mb-2 block obsidian-mono opacity-60 group-hover:opacity-100 transition-opacity">
                       {project.techStack.slice(0,3).join(" • ")}
                     </span>
                     <h2 
                       className={cn(
-                        "text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter transition-all duration-500",
-                        isHovered && !isExpanded
-                          ? "text-neon-primary drop-shadow-[0_0_15px_rgba(var(--neon-primary),0.5)]"
-                          : "text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.2)] hover:[-webkit-text-stroke:1px_rgba(255,255,255,0.8)]"
+                        "text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter transition-all duration-500 text-white",
+                        isHovered ? "drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" : ""
                       )}
-                      style={{
-                        WebkitTextFillColor: isExpanded ? 'white' : (isHovered ? 'currentColor' : 'transparent'),
-                        WebkitTextStroke: isExpanded ? '0px' : undefined
-                      }}
                     >
                       {project.title}
                     </h2>
                   </div>
-                  
-                  <div className={cn(
-                    "hidden md:flex items-center justify-center w-16 h-16 rounded-full border border-white/20 transition-all duration-500",
-                    isHovered ? "bg-white text-black rotate-0 scale-100" : "text-white -rotate-45 scale-90 opacity-50",
-                    isExpanded && "rotate-90 bg-neon-primary border-neon-primary text-black scale-100 opacity-100"
-                  )}>
-                    <ArrowRight size={24} />
-                  </div>
-                </button>
-
-                {/* Mobile Thumbnail */}
-                <div className="md:hidden w-full h-48 relative rounded-xl overflow-hidden mb-6 opacity-80" style={{ display: isExpanded ? 'none' : 'block' }}>
-                  <Image
-                    src={project.thumbnail}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                  />
                 </div>
 
-                {/* Expandable Content */}
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pb-12 pt-4 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-20">
+                {/* Content */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-20">
                         {/* Left Column: Image & Links */}
                         <div className="lg:col-span-5 space-y-6">
                           <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
@@ -241,9 +147,6 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
                           )}
                         </div>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
                 
                 {/* Background Hover Glow */}
                 <div 
