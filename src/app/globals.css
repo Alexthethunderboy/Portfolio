@@ -290,3 +290,7 @@ textarea {
   .surface-panel { border-radius: 1.5rem; }
   main section { scroll-margin-top: 6rem; }
 }
+
+/* Keep action icons legible and aligned when labels wrap on narrow screens. */
+.button-primary svg,
+.button-secondary svg { width: 1.125rem; height: 1.125rem; flex-shrink: 0; stroke-width: 2; }

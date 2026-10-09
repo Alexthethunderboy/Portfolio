@@ -11,7 +11,7 @@ import { getProjectSummary, getShortTechLabel } from "@/lib/project";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: { absolute: `${SITE.preferredName} — ${SITE.descriptor}` },
+  title: { absolute: `${SITE.name} — ${SITE.descriptor}` },
   description: SITE.description,
   alternates: { canonical: "/" },
 };

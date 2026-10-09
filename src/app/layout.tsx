@@ -10,11 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.preferredName} — ${SITE.descriptor}`,
-    template: `%s — ${SITE.preferredName}`,
+    default: `${SITE.name} — ${SITE.descriptor}`,
+    template: `%s — ${SITE.name}`,
   },
   description: SITE.description,
   applicationName: SITE.name,
+  alternates: { canonical: SITE.url },
   authors: [{ name: SITE.founder, url: SITE.url }],
   creator: SITE.founder,
   keywords: [
@@ -30,26 +31,27 @@ export const metadata: Metadata = {
     "Next.js developer",
   ],
   openGraph: {
-    title: `${SITE.preferredName} — ${SITE.descriptor}`,
+    title: `${SITE.name} — ${SITE.descriptor}`,
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,
     images: [
       {
-        url: "/brand/logos/thunderboy-avatar-black-on-yellow.png",
-        width: 1080,
-        height: 1080,
-        alt: "Thunderboy Junction mark on Voltage Yellow",
+        url: `${SITE.url}/brand/social/thunderboy-share.png`,
+        width: 1200,
+        height: 630,
+        alt: "Thunderboy — Creative Technologist. Digital products, visual identity & code.",
+        type: "image/png",
       },
     ],
     locale: "en_NG",
     type: "website",
   },
   twitter: {
-    card: "summary",
-    title: `${SITE.preferredName} — ${SITE.descriptor}`,
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.descriptor}`,
     description: SITE.description,
-    images: ["/brand/logos/thunderboy-avatar-black-on-yellow.png"],
+    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, alt: "Thunderboy — Creative Technologist" }],
   },
 };
 

@@ -40,7 +40,7 @@ export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-5">
                   <h3 className="font-display text-3xl font-bold leading-tight">{project.title}</h3>
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-white/[0.65] transition-colors group-hover:bg-voltage group-hover:text-carbon">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-white/85 transition-colors group-hover:bg-voltage group-hover:text-carbon group-focus-visible:bg-voltage group-focus-visible:text-carbon">
                     <ArrowUpRight aria-hidden="true" size={17} />
                   </span>
                 </div>

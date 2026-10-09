@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { SITE } from "@/data/site";
 
@@ -20,14 +21,14 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-1 text-sm sm:flex-row sm:gap-6">
-            <a href={`mailto:${SITE.email}`} className="inline-flex min-h-11 items-center font-bold text-white/75 hover:text-white">
+            <a href={`mailto:${SITE.email}`} className="inline-flex min-h-11 items-center gap-2 font-bold text-white/75 hover:text-white">
               Email me
             </a>
-            <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-bold text-white/75 hover:text-white">
-              GitHub <span aria-hidden="true">↗</span>
+            <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-bold text-white/75 hover:text-white">
+              GitHub <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
             </a>
-            <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-bold text-white/75 hover:text-white">
-              LinkedIn <span aria-hidden="true">↗</span>
+            <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-bold text-white/75 hover:text-white">
+              LinkedIn <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" />
             </a>
           </div>
         </div>

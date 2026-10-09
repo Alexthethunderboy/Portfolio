@@ -8,11 +8,14 @@ import { NAV_ITEMS } from "@/data/site";
 
 export default function Navbar() {
   const pathname = usePathname();
+  // Prerendered source paths can differ from the browser URL on Vercel.
+  const [activePathname, setActivePathname] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    setActivePathname(pathname);
     setIsOpen(false);
   }, [pathname]);
 
@@ -78,7 +81,7 @@ export default function Navbar() {
 
         <nav aria-label="Primary navigation" className="hidden items-center gap-1 md:flex">
           {NAV_ITEMS.map((item) => {
-            const active = pathname === item.href;
+            const active = activePathname === item.href;
             return (
               <Link
                 key={item.href}
@@ -130,7 +133,7 @@ export default function Navbar() {
         >
           <nav aria-label="Mobile navigation" className="mx-auto flex w-full max-w-md flex-col items-stretch">
             {NAV_ITEMS.map((item) => {
-              const active = pathname === item.href;
+              const active = activePathname === item.href;
               return (
                 <Link
                   key={item.href}

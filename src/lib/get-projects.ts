@@ -143,10 +143,12 @@ export function mergeProjects(existing: Project[]): Project[] {
     if (index >= 0) projects[index] = { ...projects[index], ...item };
     else projects.push({ id: toProjectId(item.title), thumbnail: "", star: { situation: "", task: "", action: "", result: "" }, ...item });
   }
-  const featured = ["drawn", "cinechive", "thegriot", "kan-powers"];
+  // Editorial order: demonstrated scope and distinctive interaction, then visual execution.
+  // Prototype/payment limitations remain documented in each project's notes.
+  const featured = ["cinechive", "drawn", "thegriot", "alienmint", "dumami-hair", "dirdeo", "ace-in-art", "kan-powers", "thunderweather", "shopper", "taxable", "the-thunderspace"];
   return projects.map(project => ({ ...project, liveUrl: safeProjectUrl(project.liveUrl), githubUrl: safeProjectUrl(project.githubUrl), thumbnail: PROJECT_PREVIEWS[toProjectId(project.title)] || project.thumbnail })).sort((a,b) => {
     const rank = (p: Project) => { const n = featured.indexOf(toProjectId(p.title)); return n < 0 ? featured.length : n; };
-    return rank(a) - rank(b);
+    return rank(a) - rank(b) || a.title.localeCompare(b.title);
   });
 }
 

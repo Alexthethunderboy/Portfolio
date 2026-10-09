@@ -62,3 +62,11 @@ Canonical web assets live in `public/brand`. Preserve SVG view boxes, aspect rat
 ## Release boundary
 
 Local validation does not publish the website. Deployment, domain changes, repository pushes, and production environment-variable changes require a separate release action and verification pass.
+
+## Editorial project order
+
+Home and Work use the same order from `mergeProjects`. This is an editorial assessment of the real preview captures and repository-backed scope descriptions, not measured usage or performance. CineChive leads for its catalogue, archive, journal and backup workflow; DRAWN follows for its distinctive focused picker; TheGriot adds a distinctive interactive globe; AlienMint shows broader technical scope but retains its simulation/testnet limitations. Dumami Hair, DirDeo and Ace-in-art demonstrate visual direction; Kan Powers demonstrates a clear enquiry workflow; ThunderWeather, Shopper, TaxAble and ThunderSpace follow. Unverified checkout, transactions and tax correctness are not treated as proven functionality.
+
+## Dependency risk disclosure
+
+The previous dependency review recorded 28 advisories (1 critical, 13 high, 14 moderate) on Next.js 15.5.27. The critical advisory is in the transitive Sanity CLI `decompress` chain; deployed runtime exposure has not been fully proven. This focused presentation release does not resolve that dependency backlog and must not be described as vulnerability-free.
