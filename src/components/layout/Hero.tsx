@@ -14,8 +14,8 @@ export default function Hero() {
           <Link href="/about" className="button-secondary">More about me <ArrowUpRight aria-hidden="true" size={16} /></Link>
         </div>
         <div className="mt-5 flex flex-wrap justify-center gap-2 text-sm text-white/70">
-          <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center px-3 font-bold hover:text-white">GitHub <span aria-hidden="true">↗</span></a>
-          <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center px-3 font-bold hover:text-white">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 px-3 font-bold hover:text-white">GitHub <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" /></a>
+          <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 px-3 font-bold hover:text-white">LinkedIn <ArrowUpRight aria-hidden="true" size={18} className="shrink-0" /></a>
         </div>
       </div>
     </section>
