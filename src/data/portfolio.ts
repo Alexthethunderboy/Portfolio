@@ -7,6 +7,7 @@ export interface Project {
     thumbnail: string;
     liveUrl: string;
     githubUrl: string;
+    notes?: { aim: string; approach: string; scope: string };
     star: {
         situation: string;
         task: string;
@@ -20,8 +21,6 @@ export interface Skill {
     icon: string;
     category: 'frontend' | 'backend' | 'tools' | 'frameworks';
 }
-
-// PROJECTS array has been removed. Data is now fetched dynamically from Sanity CMS.
 
 export const SKILLS: Skill[] = [
     { name: 'React', icon: 'react', category: 'frontend' },

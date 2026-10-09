@@ -1,60 +1,42 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Github, Linkedin, Mail } from 'lucide-react';
-import icon from '@/assets/thunderboyIcon.png';
+import Image from "next/image";
+import Link from "next/link";
+import { SITE } from "@/data/site";
 
-const Footer = () => {
-    return (
-        <footer className="border-t border-white/5 bg-obsidian py-16">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-                    <div className="flex flex-col gap-4">
-                        <Image
-                            src={icon}
-                            alt="Logo"
-                            width={120}
-                            height={30}
-                            className="h-6 w-auto brightness-150 grayscale opacity-40 hover:opacity-100 transition-opacity"
-                        />
-                        <p className="text-silver text-[10px] uppercase tracking-[0.2em] obsidian-mono">
-                            Built with passion and code.
-                        </p>
-                    </div>
+export default function Footer() {
+  return (
+    <footer className="px-4 pb-5 pt-10 sm:px-6">
+      <div className="glass-panel mx-auto max-w-6xl rounded-[2rem] px-6 py-9 sm:px-10 sm:py-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <Link href="/" aria-label="Thunderboy home" className="inline-flex min-h-11 items-center">
+              <Image
+                src="/brand/logos/thunderboy-wordmark-white.svg"
+                alt="Thunderboy"
+                width={220}
+                height={44}
+                className="h-auto w-[170px]"
+              />
+            </Link>
+          </div>
 
-                    <div className="flex items-center gap-8">
-                        <a
-                            href="https://github.com/Alexthethunderboy/Portfolio"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-silver hover:text-metallic transition-all duration-300 flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] obsidian-mono"
-                        >
-                            <Github size={16} />
-                            Source Code
-                        </a>
-                        <div className="w-px h-4 bg-white/10" />
-                        <div className="flex gap-4">
-                            <a href="https://linkedin.com/in/kelechiugoh" target="_blank" className="text-gray-400 hover:text-white transition-colors">
-                                <Linkedin size={18} />
-                            </a>
-                            <a href="mailto:kelechiugoh@example.com" className="text-gray-400 hover:text-white transition-colors">
-                                <Mail size={18} />
-                            </a>
-                        </div>
-                    </div>
-                </div>
+          <div className="flex flex-col gap-1 text-sm sm:flex-row sm:gap-6">
+            <a href={`mailto:${SITE.email}`} className="inline-flex min-h-11 items-center font-bold text-white/75 hover:text-white">
+              Email me
+            </a>
+            <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-bold text-white/75 hover:text-white">
+              GitHub <span aria-hidden="true">↗</span>
+            </a>
+            <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-bold text-white/75 hover:text-white">
+              LinkedIn <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
 
-                <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between gap-4 text-[9px] uppercase tracking-[0.2em] obsidian-mono text-silver/40">
-                    <p>© {new Date().getFullYear()} Kelechi Alexander Ugoh. Handcrafted in 2026</p>
-                    <div className="flex gap-6">
-                        <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    );
-};
-
-export default Footer;
+        <div className="mt-10 flex flex-col gap-2 border-t border-white/10 pt-5 text-xs text-white/65 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Thunderboy</p>
+          <p>Designed and built by {SITE.founder}.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}

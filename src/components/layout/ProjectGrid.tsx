@@ -1,88 +1,74 @@
-'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { toProjectId } from "@/lib/project";
 
-interface Project {
+interface ProjectSummary {
   title: string;
   description: string;
-  link: string;
   tags: string[];
+  thumbnail: string;
 }
 
-const SAMPLE_PROJECTS: Project[] = [
-  {
-    title: 'Enterprise FinTech Dashboard',
-    description: 'A high-performance financial data visualization tool built with Next.js, React Query, and Chart.js. Features real-time WebSocket integrations.',
-    link: '#',
-    tags: ['Next.js', 'TypeScript', 'WebSockets']
-  },
-  {
-    title: 'E-Commerce Storefront',
-    description: 'Headless e-commerce platform using Shopify Storefront API. Includes a custom cart implementation and seamless checkout flow.',
-    link: '#',
-    tags: ['React', 'Shopify', 'Tailwind CSS']
-  },
-  {
-    title: 'AI Prompt Manager',
-    description: 'A productivity tool for saving and organizing AI prompts. Built with a responsive glassmorphism UI and local-first architecture.',
-    link: '#',
-    tags: ['Next.js', 'Framer Motion', 'Zustand']
-  }
-];
-
-export default function ProjectGrid({ projects = SAMPLE_PROJECTS }: { projects?: Project[] }) {
+export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }) {
   return (
-    <section className="w-full py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black text-white liquid-heading mb-4">Selected Work</h2>
-          <p className="text-zinc-400 liquid-mono">Building premium digital experiences</p>
+    <section aria-labelledby="selected-work-heading" className="py-12 md:py-16">
+      <div className="site-shell">
+        <div className="mx-auto mb-8 max-w-2xl sm:mb-12 text-center">
+          <p className="meta-label text-voltage">Selected work</p>
+          <h2 id="selected-work-heading" className="display-heading mt-4 text-[clamp(2.25rem,5vw,4rem)]">
+            A few things I&apos;ve built.
+          </h2>
+          <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
+            Products, experiments, and personal projects across design and technology.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <a href={project.link} className="block group h-full">
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="relative h-full p-8 rounded-3xl liquid-glass group-hover:bg-white/[0.08] transition-colors duration-500 flex flex-col"
-                >
-                  {/* Inner Glow */}
-                  <div className="absolute inset-0 rounded-3xl liquid-glass-glow pointer-events-none group-hover:ring-white/[0.15] transition-colors duration-500" />
-                  
-                  {/* Hover Shine */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.1] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  <div className="flex justify-between items-start mb-6 relative z-10">
-                    <h3 className="text-xl font-bold text-white tracking-tight">{project.title}</h3>
-                    <div className="p-2 rounded-full bg-white/[0.05] group-hover:bg-white text-zinc-400 group-hover:text-black transition-all duration-300">
-                      <ArrowUpRight size={16} />
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-zinc-400 leading-relaxed mb-8 flex-grow relative z-10 group-hover:text-zinc-300 transition-colors duration-300">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 text-[10px] uppercase tracking-widest liquid-mono text-zinc-300 bg-white/[0.05] rounded-full border border-white/[0.05]">
+        {projects.length > 0 ? (
+          <div className="grid gap-5 md:grid-cols-2">
+            {projects.map((project) => (
+              <Link
+                key={project.title}
+                href={`/projects#${toProjectId(project.title)}`}
+                className="surface-panel group flex min-w-0 flex-col overflow-hidden rounded-[1.5rem]"
+              >
+                {project.thumbnail ? (
+                  <div className="relative aspect-[16/9] bg-storm"><Image src={project.thumbnail} alt={`${project.title} project preview`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-top" /></div>
+                ) : (
+                  <div className="flex aspect-[16/9] items-center justify-center border-b border-white/10 bg-storm px-6"><span className="font-display text-4xl font-bold text-white/80">{project.title}</span></div>
+                )}
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-5">
+                  <h3 className="font-display text-3xl font-bold leading-tight">{project.title}</h3>
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-white/[0.65] transition-colors group-hover:bg-voltage group-hover:text-carbon">
+                    <ArrowUpRight aria-hidden="true" size={17} />
+                  </span>
+                </div>
+                <p className="mt-3 flex-1 leading-7 text-white/70">{project.description}</p>
+                {project.tags.length > 0 && (
+                  <ul className="mt-5 flex flex-wrap gap-2" aria-label={`${project.title} technologies`}>
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <li key={tag} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/70">
                         {tag}
-                      </span>
+                      </li>
                     ))}
-                  </div>
-                </motion.div>
-              </a>
-            </motion.div>
-          ))}
+                  </ul>
+                )}
+              </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="glass-panel rounded-[1.75rem] p-8 text-center">
+            <p className="text-lg font-bold">The project list is taking a moment to load.</p>
+            <p className="mt-2 text-white/70">Browse the repository-backed project notes on the Work page.</p>
+          </div>
+        )}
+
+        <div className="mt-10 flex justify-center">
+          <Link href="/projects" className="button-secondary">
+            See all projects <ArrowUpRight aria-hidden="true" size={16} />
+          </Link>
         </div>
       </div>
     </section>

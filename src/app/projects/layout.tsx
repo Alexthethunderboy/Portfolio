@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Work | Kelechi Alexander Ugoh',
-  description: 'Selected projects and case studies showcasing performance, accessibility, and robust engineering.',
+  title: 'Work',
+  description: 'Products, experiments, and personal projects by creative technologist Kelechi Alexander Ugoh.',
+  alternates: { canonical: '/projects' },
 };
 
 export default function WorkLayout({

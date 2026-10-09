@@ -8,40 +8,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        obsidian: '#09090b', // zinc-950
-        carbon: '#18181b', // zinc-900
-        metallic: '#f4f4f5', // zinc-100
-        silver: '#a1a1aa', // zinc-400
-        neon: {
-          primary: '#00F0FF', // Glowing Cyan
-          secondary: '#FF0055', // Glowing Magenta
-          accent: '#7B61FF', // Deep Violet
-          danger: '#FF453A',
-        },
-        glass: {
-          light: 'rgba(255, 255, 255, 0.06)',
-          border: 'rgba(255, 255, 255, 0.12)',
-          highlight: 'rgba(255, 255, 255, 0.05)',
-        }
+        carbon: '#050505',
+        voltage: '#FFD400',
+        warm: '#EEEAE2',
+        graphite: '#6E706F',
+        storm: '#111A2E',
+        violet: '#261A3B',
+        night: '#0E201D',
       },
-
-      animation: {
-        'blob': 'blob 20s infinite',
-        'blob-reverse': 'blob-reverse 25s infinite',
+      fontFamily: {
+        display: ['var(--font-display)', 'Arial Black', 'Arial', 'sans-serif'],
+        body: ['Arial', 'Helvetica', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Menlo', 'Consolas', 'monospace'],
       },
-      keyframes: {
-        blob: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
-        },
-        'blob-reverse': {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(-30px, 50px) scale(1.1)' },
-          '66%': { transform: 'translate(20px, -20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
-        }
+      transitionTimingFunction: {
+        'tb-out': 'cubic-bezier(0.16, 1, 0.3, 1)',
       }
     },
   },

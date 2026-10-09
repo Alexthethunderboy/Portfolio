@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="188 68 101 94" role="img" aria-labelledby="title desc">
+  <title id="title">Thunderboy Junction icon — reversed</title>
+  <desc id="desc">A white compact u and n junction divided by a transparent lightning strike.</desc>
+  <defs><clipPath id="window"><rect x="188" y="68" width="101" height="94"/></clipPath><mask id="junction-cut" maskUnits="userSpaceOnUse" x="135" y="60" width="200" height="110"><rect x="135" y="60" width="200" height="110" fill="#fff"/><path transform="translate(-4 0)" fill="#000" stroke="#000" stroke-width="2.5" stroke-linejoin="bevel" d="M248.56 74L227.56 82L222.56 119L237.56 113L236.56 152L254.56 88L241.56 91Z"/></mask></defs>
+  <g fill="#fff" mask="url(#junction-cut)" clip-path="url(#window)">
+    <path d="M183.52 84.32L183.52 112.88Q183.52 118.96 185.48 122.64Q187.44 126.32 192.88 126.32Q198.48 126.32 200.40 122.64Q202.32 118.96 202.32 112.88L202.32 84.32L233.36 84.32L233.36 115.92Q233.36 132.72 222.80 142.32Q212.24 151.92 192.88 151.92Q173.68 151.92 163.12 142.32Q152.56 132.72 152.56 115.92L152.56 84.32L183.52 84.32Z"/>
+    <path transform="translate(-8 0)" d="M293.12 82.40Q300.40 82.40 307.24 85.24Q314.08 88.08 318.52 94.28Q322.96 100.48 322.96 110.56L322.96 150L291.44 150L291.44 115.44Q291.44 110.32 288.92 107.32Q286.40 104.32 282.16 104.32Q277.92 104.32 274.92 107.32Q271.92 110.32 271.92 115.44L271.92 150L240.40 150L240.40 84.32L271.92 84.32L271.92 92.56Q273.44 88.80 279.40 85.60Q285.36 82.40 293.12 82.40Z"/>
+  </g>
+</svg>

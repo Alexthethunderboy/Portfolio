@@ -34,3 +34,42 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Secrets and local review artifacts
+.env*
+!.env.example
+/artifacts/
+/reports/
+/screenshots/
+*.log
+/.codex/
+/.agents/
+
+# Retired assets kept locally; excluded from repository and production
+/public/assets/mockM2.png
+/public/assets/mockM3.png
+/public/assets/mockM1.png
+/public/assets/mockM4.png
+/public/assets/mockup.png
+/public/assets/mockup1-0.png
+/public/assets/8.png
+/public/assets/thunderboyIcon.png
+/public/assets/mockup4.png
+/public/assets/mockM1-0.png
+/public/assets/mockup1.png
+/public/assets/mockup2.png
+/public/assets/mockup3.png
+/public/assets/4.png
+/public/assets/5.png
+/public/assets/7.png
+/public/assets/6.png
+/public/assets/2.png
+/public/assets/3.png
+/public/assets/1.png
+/public/assets/luca-bravo-XJXWbfSo2f0-unsplash.jpg
+/public/assets/aboutimg.jpg
+/public/mainresume.pdf
+/public/output.css
+/public/next.svg
+/public/vercel.svg
+/src/assets

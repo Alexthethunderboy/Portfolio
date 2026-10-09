@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contact | Kelechi Alexander Ugoh',
-  description: 'Let\'s build something extraordinary. Get in touch to discuss engineering trends or projects.',
+  title: 'Contact',
+  description: 'Contact creative technologist Kelechi Alexander Ugoh about a project, idea, or collaboration.',
+  alternates: { canonical: '/contact' },
 };
 
 export default function ContactLayout({

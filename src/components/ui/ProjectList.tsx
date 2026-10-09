@@ -1,189 +1,128 @@
-'use client';
-import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Github, ExternalLink } from 'lucide-react';
-import { Project } from '@/data/portfolio';
-import { cn } from '@/lib/utils';
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Github } from "lucide-react";
+import type { Project } from "@/data/portfolio";
+import { getProjectSummary, getShortTechLabel, toProjectId } from "@/lib/project";
 
-interface ProjectListProps {
-  projects: Project[];
-}
-
-const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
+export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
-    <div className="container mx-auto px-4 py-24 md:py-32" ref={containerRef}>
-      <div className="max-w-4xl mb-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white via-silver to-obsidian-light drop-shadow-lg tracking-tighter mb-6">
-            Selected Projects
-          </h1>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <p className="text-silver text-lg md:text-xl leading-relaxed max-w-2xl">
-            A focus on performance, accessibility, and robust engineering. 
-            Scroll down to view technical details and case studies for each project.
+    <>
+      <section className="px-4 pb-8 pt-24 sm:pb-14 text-center sm:px-6 sm:pt-32 md:pb-20">
+        <div className="surface-panel mx-auto max-w-5xl rounded-[2rem] px-5 py-8 sm:rounded-[2.5rem] sm:px-10 sm:py-16">
+          <p className="meta-label text-voltage">Work</p>
+          <h1 className="display-heading mt-5 text-balance text-[clamp(2.25rem,7vw,5.5rem)]">Selected work &amp; experiments.</h1>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
+            A mix of products, experiments, and personal spaces. Each one taught me something different.
           </p>
-        </motion.div>
-      </div>
-
-      {projects.length === 0 ? (
-        <div className="text-center py-20 text-silver">
-          <p className="text-xl">Loading projects...</p>
-          <p className="text-sm mt-2">Make sure you&apos;ve published your projects in the Sanity Studio!</p>
         </div>
-      ) : (
-        <div className="relative flex flex-col w-full border-t border-white/10">
-          {projects.map((project, index) => {
-            const isHovered = hoveredIndex === index;
+      </section>
 
-            return (
-              <div 
-                key={project.id}
-                className="group border-b border-white/10 relative pb-12"
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {/* List Item Header */}
-                <div className="w-full py-8 md:py-12 flex flex-col items-start text-left relative z-10">
-                  <div className="flex flex-col relative z-10 w-full mb-6">
-                    <span className="text-neon-primary text-xs tracking-[0.2em] uppercase mb-2 block obsidian-mono opacity-60 group-hover:opacity-100 transition-opacity">
-                      {project.techStack.slice(0,3).join(" • ")}
-                    </span>
-                    <h2 
-                      className={cn(
-                        "text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter transition-all duration-500 text-white",
-                        isHovered ? "drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" : ""
-                      )}
-                    >
-                      {project.title}
-                    </h2>
+      {projects.length > 0 ? (
+        <section aria-label="Projects" className="pb-16 md:pb-24">
+          <div className="site-shell grid gap-5 md:grid-cols-2">
+            {projects.map((project, index) => {
+              const projectTitle = project.title.trim();
+              const isWide = false;
+              const technologies = project.techStack
+                .flatMap(value => getShortTechLabel(value).split(","))
+                .map(value => value.trim())
+                .filter(Boolean)
+                .slice(0, 4);
+
+              return (
+                <article
+                  key={project.id}
+                  id={toProjectId(projectTitle)}
+                  className={`surface-panel min-w-0 scroll-mt-28 overflow-hidden rounded-[1.75rem] ${isWide ? "md:col-span-2" : ""}`}
+                >
+                  <div className={`relative overflow-hidden bg-storm ${isWide ? "aspect-[16/8]" : "aspect-[16/9]"}`}>
+                    {project.thumbnail ? <Image
+                      src={project.thumbnail}
+                      alt={`${projectTitle} project preview`}
+                      fill
+                      priority={index === 0 && Boolean(project.thumbnail)}
+                      sizes={isWide ? "(min-width: 768px) 76rem, 100vw" : "(min-width: 768px) 38rem, 100vw"}
+                      className="object-cover object-top transition-transform duration-700 ease-tb-out hover:scale-[1.02]"
+                    /> : <div className="flex h-full items-center justify-center px-6"><span className="font-display text-4xl font-bold text-white/80">{projectTitle}</span></div>}
+                    <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-carbon/15 via-transparent to-transparent" />
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-20">
-                        {/* Left Column: Image & Links */}
-                        <div className="lg:col-span-5 space-y-6">
-                          <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                            <Image
-                              src={project.thumbnail}
-                              alt={project.title}
-                              fill
-                              className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                            <div className="absolute bottom-4 left-4 right-4 flex gap-3">
-                              {project.githubUrl && (
-                                <a
-                                  href={project.githubUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors"
-                                >
-                                  <Github size={14} /> Code
-                                </a>
-                              )}
-                              {project.liveUrl && (
-                                <a
-                                  href={project.liveUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2 px-4 py-2 bg-neon-primary text-black font-bold rounded-full text-xs uppercase tracking-widest hover:bg-white transition-colors"
-                                >
-                                  <ExternalLink size={14} /> Live Site
-                                </a>
-                              )}
-                            </div>
-                          </div>
+                  <div className={`p-5 sm:p-8 ${isWide ? "md:grid md:grid-cols-12 md:gap-8" : ""}`}>
+                    <div className={isWide ? "md:col-span-5" : ""}>
+                      <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">{projectTitle}</h2>
+                      {technologies.length > 0 && (
+                        <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${projectTitle} technologies`}>
+                          {technologies.map((technology) => (
+                            <li key={technology} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/70">
+                              {technology}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
 
-                          <div>
-                            <h4 className="text-xs text-silver uppercase tracking-[0.2em] mb-3">Tech Stack</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {project.techStack.map((tech) => (
-                                <span key={tech} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] text-silver uppercase tracking-wider obsidian-mono">
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Right Column: Details */}
-                        <div className="lg:col-span-7 space-y-8">
-                          <div>
-                            <h3 className="text-2xl font-bold mb-4">{project.oneLiner}</h3>
-                            <p className="text-silver leading-relaxed">
-                              {project.description || "A deep dive into building scalable and beautiful web experiences. This project challenged conventional boundaries of frontend architecture."}
-                            </p>
-                          </div>
-
-                          {project.star && (project.star.situation || project.star.result) && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-white/10">
-                              {project.star.situation && (
-                                <div>
-                                  <h4 className="text-[10px] text-neon-primary uppercase tracking-[0.2em] obsidian-mono mb-2">Situation / Challenge</h4>
-                                  <p className="text-sm text-silver leading-relaxed">{project.star.situation}</p>
-                                </div>
-                              )}
-                              {project.star.result && (
-                                <div>
-                                  <h4 className="text-[10px] text-neon-primary uppercase tracking-[0.2em] obsidian-mono mb-2">Outcome / Result</h4>
-                                  <p className="text-sm text-silver leading-relaxed">{project.star.result}</p>
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        </div>
+                    <div className={`mt-5 sm:mt-7 ${isWide ? "md:col-span-7 md:mt-0" : ""}`}>
+                      <p className="text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
+                        {getProjectSummary(projectTitle, project.oneLiner || project.description)}
+                      </p>
+                      {project.notes && (
+                        <details className="group mt-6 border-t border-white/15 pt-4">
+                          <summary className="flex min-h-11 cursor-pointer items-center justify-between font-bold text-voltage">Project notes <span aria-hidden="true" className="text-xl transition-transform group-open:rotate-45">+</span></summary>
+                          <dl className="mt-5 space-y-5 text-sm leading-7 text-white/70">
+                            {[ ["Aim", project.notes.aim], ["Approach", project.notes.approach], ["Scope", project.notes.scope] ].map(([label, body]) => (
+                              <div key={label}><dt className="font-bold text-white">{label}</dt><dd className="mt-1">{body}</dd></div>
+                            ))}
+                          </dl>
+                        </details>
+                      )}
+                      <div className="mt-5 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2">
+                        {project.liveUrl && (
+                          <a href={project.liveUrl} aria-label={`View ${projectTitle} live site`} target="_blank" rel="noopener noreferrer" className="button-primary">
+                            Live site <ArrowUpRight aria-hidden="true" size={16} />
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a href={project.githubUrl} aria-label={`View ${projectTitle} source code`} target="_blank" rel="noopener noreferrer" className="button-secondary">
+                            <Github aria-hidden="true" size={16} /> Source
+                          </a>
+                        )}
                       </div>
-                
-                {/* Background Hover Glow */}
-                <div 
-                  className={cn(
-                    "absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent pointer-events-none transition-opacity duration-500",
-                    isHovered ? "opacity-100" : "opacity-0"
-                  )}
-                />
-              </div>
-            );
-          })}
-        </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <section className="pb-16 md:pb-24">
+          <div className="site-shell">
+            <div className="surface-panel rounded-[2rem] p-10 text-center">
+              <h2 className="font-display text-4xl font-bold">The project list is unavailable right now.</h2>
+              <p className="mx-auto mt-4 max-w-xl leading-7 text-white/[0.58]">
+                My public repositories are still available on GitHub while the page reconnects.
+              </p>
+              <a href="https://github.com/Alexthethunderboy" target="_blank" rel="noopener noreferrer" className="button-primary mt-8">
+                Visit GitHub <ArrowUpRight aria-hidden="true" size={16} />
+              </a>
+            </div>
+          </div>
+        </section>
       )}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        className="mt-32"
-      >
-        <div className="p-12 rounded-3xl liquid-glass border border-white/5 text-center relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-neon-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          <h2 className="text-3xl font-black mb-4 tracking-tight">Open Source Mindset</h2>
-          <p className="text-silver mb-8 max-w-lg mx-auto leading-relaxed">
-            I believe in building publicly and sharing knowledge. Dive into the source code of my projects to see the architecture behind the pixels.
-          </p>
-          <a 
-            href="https://github.com/Alexthethunderboy" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-neon-primary hover:text-black transition-all shadow-lg hover:shadow-neon-primary/20"
-          >
-            <Github size={16} /> Explore GitHub
-          </a>
+      <section className="pb-16 md:pb-24">
+        <div className="site-shell">
+          <div className="surface-panel flex flex-col gap-7 rounded-[2rem] p-6 sm:p-10 md:flex-row md:items-end md:justify-between md:p-12">
+            <div>
+              <p className="meta-label text-voltage">Want to know more?</p>
+              <h2 className="display-heading mt-4 max-w-3xl text-[clamp(2.25rem,5vw,4rem)]">Ask me about the work.</h2>
+            </div>
+            <Link href="/contact" className="button-primary shrink-0">
+              Get in touch <ArrowUpRight aria-hidden="true" size={16} />
+            </Link>
+          </div>
         </div>
-      </motion.div>
-    </div>
+      </section>
+    </>
   );
-};
-
-export default ProjectList;
+}

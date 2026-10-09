@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About | Kelechi Alexander Ugoh',
-  description: 'Engineering digital experiences with precision and intent. Learn about my philosophy and tech stack.',
+  title: 'About',
+  description: 'Meet Kelechi Alexander Ugoh, the creative technologist behind Thunderboy.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutLayout({

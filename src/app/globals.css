@@ -2,55 +2,291 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "League Spartan";
+  src: url("/brand/fonts/LeagueSpartan-wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/brand/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
-  --background: #09090b; /* zinc-950 */
-  --foreground: #fafafa; /* zinc-50 */
+  --tb-carbon: #050505;
+  --tb-voltage: #ffd400;
+  --tb-white: #ffffff;
+  --tb-muted: #a9a9b3;
+  --tb-storm-blue: #111a2e;
+  --tb-voltage-violet: #261a3b;
+  --tb-night-green: #0e201d;
+  --font-display: "League Spartan";
+  --font-mono: "IBM Plex Mono";
+  --tb-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--tb-carbon);
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-obsidian text-metallic font-sans antialiased overflow-x-hidden;
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--tb-carbon);
+  color: var(--tb-white);
+  font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
-/* 1. Liquid Glass Core Utilities */
-.liquid-glass {
-  @apply backdrop-blur-xl bg-white/[0.06] border border-white/[0.12] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)];
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
-.liquid-glass-glow {
-  @apply ring-1 ring-white/[0.05];
+::selection {
+  background: var(--tb-voltage);
+  color: var(--tb-carbon);
 }
 
-/* 2. Liquid Glass Interactive State */
-.liquid-glass-interactive {
-  @apply transition-all duration-300;
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
 }
 
-.liquid-glass-interactive:hover {
-  @apply bg-white/[0.1] border-white/[0.2];
+:focus-visible {
+  outline: 3px solid var(--tb-voltage);
+  outline-offset: 4px;
 }
 
-/* 3. Typography Helpers */
-.liquid-heading {
-  @apply font-sans font-extrabold tracking-tight;
+.atmosphere {
+  background-color: transparent;
 }
 
-.liquid-mono {
-  @apply font-mono text-[0.75rem] text-zinc-400 uppercase tracking-[0.1em];
+.cosmic-background {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 78% 26%, rgba(255, 212, 0, 0.15), transparent 28rem),
+    radial-gradient(circle at 12% 18%, rgba(255, 188, 0, 0.09), transparent 24rem),
+    radial-gradient(circle at 48% 88%, rgba(255, 212, 0, 0.075), transparent 32rem),
+    #050505;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+.cosmic-background canvas,
+.cosmic-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-obsidian;
+.cosmic-vignette {
+  background:
+    radial-gradient(ellipse at center, transparent 20%, rgba(5, 5, 5, 0.12) 60%, rgba(5, 5, 5, 0.72) 100%),
+    linear-gradient(to bottom, rgba(5, 5, 5, 0.06), rgba(5, 5, 5, 0.35));
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-carbon border border-white/10 rounded-full;
+.hero-title-stage {
+  display: grid;
+  min-height: 1.95em;
+  align-items: center;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-silver;
+.hero-title-layer {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(0.22em) scale(0.985);
+  filter: blur(10px);
+  transition:
+    opacity 260ms ease,
+    transform 360ms var(--tb-ease-out),
+    filter 300ms ease;
+}
+
+.hero-title-layer.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition-delay: 220ms;
+}
+
+.site-shell {
+  width: min(100% - 2rem, 76rem);
+  margin-inline: auto;
+}
+
+.display-heading {
+  font-family: var(--font-display), "Arial Black", Arial, sans-serif;
+  font-weight: 760;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.meta-label {
+  font-family: var(--font-mono), Menlo, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.11em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.025));
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34), inset 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    transform 300ms var(--tb-ease-out),
+    border-color 300ms var(--tb-ease-out),
+    background-color 300ms var(--tb-ease-out);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.cosmic-hero {
+  border-color: rgba(255, 212, 0, 0.16);
+  background: linear-gradient(145deg, rgba(5, 5, 5, 0.56), rgba(5, 5, 5, 0.24));
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.42),
+    0 0 80px rgba(255, 212, 0, 0.035),
+    inset 0 1px rgba(255, 234, 130, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.8rem 1.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition:
+    transform 200ms var(--tb-ease-out),
+    background-color 200ms var(--tb-ease-out),
+    border-color 200ms var(--tb-ease-out),
+    color 200ms var(--tb-ease-out);
+}
+
+.button-primary {
+  background: var(--tb-voltage);
+  color: var(--tb-carbon);
+}
+
+.button-secondary {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--tb-white);
+}
+
+.button-primary:hover,
+.button-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary:hover {
+  background: var(--tb-white);
+}
+
+.button-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 200;
+  top: 0.75rem;
+  left: 0.75rem;
+  transform: translateY(-160%);
+  border-radius: 999px;
+  background: var(--tb-voltage);
+  color: var(--tb-carbon);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  transition: transform 180ms var(--tb-ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .site-shell {
+    width: min(100% - 4rem, 76rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Quiet surfaces keep the existing cosmic identity behind the content. */
+.surface-panel {
+  min-width: 0;
+  border: 1px solid rgb(255 255 255 / .12);
+  background: rgb(12 13 15 / .92);
+}
+.display-heading { overflow-wrap: anywhere; }
+.site-shell > *, form, form > div, form > div > div { min-width: 0; }
+.surface-panel summary:focus-visible {
+  outline: 2px solid var(--voltage, #ffd400);
+  outline-offset: 5px;
+}
+
+/* Mobile surfaces retain generous touch targets without oversized gaps. */
+@media (max-width: 639px) {
+  .button-primary, .button-secondary { font-size: .875rem; }
+  .surface-panel { border-radius: 1.5rem; }
+  main section { scroll-margin-top: 6rem; }
 }

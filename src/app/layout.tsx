@@ -1,66 +1,90 @@
-import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google';
+import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
-import LiquidBackground from "@/components/layout/LiquidBackground";
 import Footer from "@/components/layout/Footer";
-import CustomCursor from "@/components/layout/CustomCursor";
-import ContactDock from "@/components/layout/ContactDock";
-import { Metadata } from 'next';
-
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  variable: "--font-heading",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+import CosmicBackground from "@/components/layout/CosmicBackground";
+import { SITE } from "@/data/site";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://portfolio-seven-xi-62.vercel.app'),
-  title: 'Kelechi Alexander Ugoh | Software Engineer Showcase',
-  description: 'Enterprise-ready software engineering portfolio focusing on performance, scalability, and recruiter-centric UX.',
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.preferredName} — ${SITE.descriptor}`,
+    template: `%s — ${SITE.preferredName}`,
+  },
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.founder, url: SITE.url }],
+  creator: SITE.founder,
+  keywords: [
+    "Thunderboy",
+    "Kelechi Alexander Ugoh",
+    "Alex",
+    "creative technologist",
+    "creative direction",
+    "visual identity",
+    "front-end engineering",
+    "design engineering",
+    "digital product",
+    "Next.js developer",
+  ],
   openGraph: {
-    title: 'Kelechi Alexander Ugoh | Software Engineer',
-    description: 'Specializing in high-performance Next.js and TypeScript applications.',
+    title: `${SITE.preferredName} — ${SITE.descriptor}`,
+    description: SITE.description,
+    url: SITE.url,
+    siteName: SITE.name,
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/brand/logos/thunderboy-avatar-black-on-yellow.png",
+        width: 1080,
+        height: 1080,
+        alt: "Thunderboy Junction mark on Voltage Yellow",
       },
     ],
-    locale: "en_US",
+    locale: "en_NG",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: `${SITE.preferredName} — ${SITE.descriptor}`,
+    description: SITE.description,
+    images: ["/brand/logos/thunderboy-avatar-black-on-yellow.png"],
   },
 };
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.founder,
+  alternateName: [SITE.preferredName, SITE.name],
+  url: SITE.url,
+  description: SITE.description,
+  email: `mailto:${SITE.email}`,
+  jobTitle: SITE.descriptor,
+  sameAs: [SITE.github, SITE.linkedin],
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${interTight.variable} ${jetbrainsMono.variable} relative min-h-screen bg-obsidian text-metallic selection:bg-neon-primary/30 overflow-x-hidden font-sans`}>
-        <CustomCursor />
-        <LiquidBackground />
+    <html lang="en">
+      <body className="atmosphere">
+        <CosmicBackground />
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <Navbar />
-        <main className="relative z-10 pt-16">
-          {children}
-        </main>
-        <ContactDock />
+        <main id="main-content">{children}</main>
         <Footer />
-        <ToastContainer theme="dark" position="bottom-right" toastClassName="!bg-carbon !border !border-white/10 !text-metallic !font-sans" />
+        <ToastContainer
+          position="bottom-right"
+          theme="dark"
+          toastClassName="!rounded-2xl !border !border-white/[0.15] !bg-carbon !font-body !text-white"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+        />
       </body>
     </html>
   );

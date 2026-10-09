@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kelechi Alexander Ugoh portfolio
 
-## Getting Started
+The personal portfolio of creative technologist Kelechi Alexander Ugoh, published under the name **Thunderboy**.
 
-First, run the development server:
+The visual direction brings the original portfolio's atmospheric background, centered layouts, and soft glass surfaces together with the Thunderboy wordmark, typography, and yellow accent.
+
+## Stack
+
+- Next.js 15 App Router
+- React 19 and TypeScript
+- Tailwind CSS
+- Sanity for portfolio content
+- A clearly labelled email-app draft for contact
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Create `.env.local` with the services used by your environment. Keep values out of Git.
 
-## Learn More
+```text
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=
+NEXT_PUBLIC_SANITY_API_VERSION=
+```
 
-To learn more about Next.js, take a look at the following resources:
+The Sanity project has public development fallbacks in `src/sanity/lib/client.ts`. The contact form opens a draft in the visitor's email app. The visitor reviews and sends it there; the website does not deliver email or claim successful delivery. Fields remain on the page if no email app opens. Direct email is always available.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Useful commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm run start
+```
 
-## Deploy on Vercel
+## Content model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Projects are managed in Sanity and support:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- title and one-line summary;
+- detailed description;
+- thumbnail;
+- technology list;
+- live and source URLs;
+- situation, task, action, and result notes.
+
+The public Work page keeps each project concise. The longer notes remain available in Sanity for future case studies. Claims and metrics should be supported before publication.
+
+## Brand assets
+
+Canonical web assets live in `public/brand`. Preserve SVG view boxes, aspect ratios, and the transparent strike in the Thunderboy wordmark and Junction. Font licence files are included beside the font binaries.
+
+## Release boundary
+
+Local validation does not publish the website. Deployment, domain changes, repository pushes, and production environment-variable changes require a separate release action and verification pass.

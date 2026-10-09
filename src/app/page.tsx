@@ -1,48 +1,59 @@
-import React from "react";
-import TechStack from "@/components/layout/TechStack";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import Hero from "@/components/layout/Hero";
 import ProjectGrid from "@/components/layout/ProjectGrid";
-import { client } from "@/sanity/lib/client";
+import TechStack from "@/components/layout/TechStack";
+import { getProjects } from "@/lib/get-projects";
+import { SITE } from "@/data/site";
+import { getProjectSummary, getShortTechLabel } from "@/lib/project";
 
 export const revalidate = 60;
 
-export const metadata = {
-  title: 'Home | Kelechi Alexander Ugoh',
-  description: 'Enterprise-ready software engineering portfolio focusing on performance, scalability, and recruiter-centric UX.',
+export const metadata: Metadata = {
+  title: { absolute: `${SITE.preferredName} — ${SITE.descriptor}` },
+  description: SITE.description,
+  alternates: { canonical: "/" },
 };
 
-export default async function Homepage() {
-  const query = `*[_type == "project"] | order(_createdAt desc)[0...3] {
-    title,
-    oneLiner,
-    description,
-    techStack,
-    liveUrl,
-    githubUrl
-  }`;
-
-  const sanityProjects = await client.fetch(query);
-
-  const mappedProjects = sanityProjects.map((p: any) => ({
-    title: p.title || '',
-    description: p.oneLiner || p.description || '',
-    link: p.liveUrl || p.githubUrl || '#',
-    tags: p.techStack || []
+async function getSelectedProjects() {
+  return (await getProjects()).slice(0, 4).map(project => ({
+    title: project.title,
+    description: getProjectSummary(project.title, project.oneLiner || project.description),
+    tags: project.techStack.flatMap(value => getShortTechLabel(value).split(",")).map(value => value.trim()).filter(Boolean),
+    thumbnail: project.thumbnail,
   }));
+}
+
+export default async function Homepage() {
+  const projects = await getSelectedProjects();
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <>
       <Hero />
+      <ProjectGrid projects={projects} />
+      <TechStack />
 
-      {/* Selected Projects */}
-      <section className="w-full relative py-10 z-10">
-        <ProjectGrid projects={mappedProjects} />
+      <section className="pb-16 md:pb-24">
+        <div className="site-shell">
+          <div className="surface-panel grid gap-8 rounded-[2rem] p-6 sm:p-10 md:grid-cols-12 md:items-end md:p-12">
+            <div className="md:col-span-8">
+              <p className="meta-label text-voltage">Have something in mind?</p>
+              <h2 className="display-heading mt-4 text-balance text-[clamp(2.25rem,5vw,4rem)]">
+                Tell me what you&apos;re working on.
+              </h2>
+            </div>
+            <div className="md:col-span-4">
+              <p className="mb-7 leading-7 text-white/60">
+                Send me the idea, the problem, or even the rough version. We can start from there.
+              </p>
+              <Link href="/contact" className="button-primary">
+                Get in touch <ArrowUpRight aria-hidden="true" size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
-
-      {/* Tech Pill Row (Recruiter UX) */}
-      <section className="w-full py-20 relative z-10">
-        <TechStack />
-      </section>
-    </div>
+    </>
   );
 }
