@@ -28,13 +28,13 @@ export default function AboutPage() {
             <h1 className="display-heading mt-5 text-balance text-[clamp(2rem,8vw,2.75rem)] sm:text-[clamp(2.5rem,6vw,4.75rem)]">
               Kelechi Alexander Ugoh.
             </h1>
-            <p className="mt-4 text-lg leading-7 text-voltage">Creative technologist.</p>
+            <p className="mt-4 text-lg leading-7 text-voltage">Cybersecurity analyst focused on AppSec. Creative technologist.</p>
             <div className="mt-8 max-w-2xl space-y-5 text-base leading-7 text-white/[0.64] sm:text-lg sm:leading-8">
               <p>
                 I work across product thinking, frontend engineering, visual identity, creative direction, and multidisciplinary systems.
               </p>
               <p>
-                My technical foundation is React, Next.js, and TypeScript. I&apos;m also developing deeper capability in application and cloud security.
+                My technical foundation is React, Next.js, and TypeScript. My cybersecurity direction is application security (AppSec), and I continue to develop that capability through study and practical projects.
               </p>
             </div>
           </div>

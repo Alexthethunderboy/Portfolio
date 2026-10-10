@@ -1,8 +1,8 @@
 # Kelechi Alexander Ugoh portfolio
 
-The personal portfolio of creative technologist Kelechi Alexander Ugoh, published under the name **Thunderboy**.
+The personal portfolio of Kelechi Alexander Ugoh, a cybersecurity analyst focused on application security (AppSec), building digital products and visual experiences as **Thunderboy**. This is his chosen professional direction; no employment, certification or seniority is implied.
 
-The visual direction brings the original portfolio's atmospheric background, centered layouts, and soft glass surfaces together with the Thunderboy wordmark, typography, and yellow accent.
+[Explore Thunderboy](https://thunderboy.vercel.app)
 
 ## Stack
 
