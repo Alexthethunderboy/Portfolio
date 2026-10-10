@@ -31,10 +31,10 @@ export default function AboutPage() {
             <p className="mt-4 text-lg leading-7 text-voltage">Cybersecurity analyst focused on AppSec. Creative technologist.</p>
             <div className="mt-8 max-w-2xl space-y-5 text-base leading-7 text-white/[0.64] sm:text-lg sm:leading-8">
               <p>
-                I work across product thinking, frontend engineering, visual identity, creative direction, and multidisciplinary systems.
+                I build digital products and work across frontend engineering, visual identity and creative direction.
               </p>
               <p>
-                My technical foundation is React, Next.js, and TypeScript. My cybersecurity direction is application security (AppSec), and I continue to develop that capability through study and practical projects.
+                I use React, Next.js and TypeScript. My cybersecurity focus is AppSec, which I develop through study and practical projects.
               </p>
             </div>
           </div>
