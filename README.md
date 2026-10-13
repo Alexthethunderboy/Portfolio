@@ -1,6 +1,6 @@
 # Kelechi Alexander Ugoh portfolio
 
-The personal portfolio of Kelechi Alexander Ugoh, a cybersecurity analyst focused on application security (AppSec), building digital products and visual experiences as **Thunderboy**.
+The personal portfolio of Kelechi Alexander Ugoh, a developer transitioning into cybersecurity and currently training with **10Alytics**. Cybersecurity is the foreground of his direction, with application security (AppSec) as a natural bridge from development alongside broader security foundations. He continues building digital products and visual identities as **Thunderboy**.
 
 [Explore Thunderboy](https://thunderboy.vercel.app)
 
@@ -69,4 +69,4 @@ Home and Work use the same order from `mergeProjects`. This is an editorial asse
 
 ## Dependency risk disclosure
 
-The previous dependency review recorded 28 advisories (1 critical, 13 high, 14 moderate) on Next.js 15.5.27. The critical advisory is in the transitive Sanity CLI `decompress` chain; deployed runtime exposure has not been fully proven. This focused presentation release does not resolve that dependency backlog and must not be described as vulnerability-free.
+The local dependency review on 13 October 2026 records 22 vulnerable package entries (1 critical, 14 high, 7 moderate), down from 33 before targeted PrismJS, Sanity UUID-wrapper and adm-zip updates. Counts include inherited affected packages. The critical finding remains in the transitive Sanity CLI `decompress` archive-extraction chain; no critical public request path has been demonstrated. Unpatched build/watch and package-manager tooling findings remain. Local fixes do not establish that the deployed website uses these versions; this work must not be described as vulnerability-free.

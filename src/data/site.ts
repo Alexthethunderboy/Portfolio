@@ -2,9 +2,10 @@ export const SITE = {
   name: "Thunderboy",
   founder: "Kelechi Alexander Ugoh",
   preferredName: "Alex",
-  descriptor: "Cybersecurity Analyst · AppSec · Creative Technologist",
+  descriptor: "Cybersecurity · Development · Design",
   description:
-    "The portfolio of Kelechi Alexander Ugoh, a cybersecurity analyst focused on application security (AppSec), building digital products and visual experiences as Thunderboy.",
+    "Kelechi Alexander Ugoh's portfolio: a developer transitioning into cybersecurity, with practical security learning, digital products and visual design as Thunderboy.",
+  socialImageAlt: "Thunderboy wordmark — Cybersecurity, Development and Design. A developer transitioning into cybersecurity.",
   url: "https://thunderboy.vercel.app",
   email: "alexthegreatdeveloper@gmail.com",
   github: "https://github.com/Alexthethunderboy",

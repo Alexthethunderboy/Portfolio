@@ -10,6 +10,19 @@ interface SanityProject {
   thumbnail?: Parameters<typeof urlForImage>[0]; star?: Partial<Project["star"]>;
 }
 const curated = [
+  {
+    title: "TheGriot",
+    oneLiner: "A geographic-history exploration prototype.",
+    description: "Explore history, oral traditions and different narratives on an interactive globe.",
+    techStack: ["Next.js", "React", "TypeScript", "Deck.gl"],
+    liveUrl: "https://thegriot.vercel.app/",
+    githubUrl: "https://github.com/Alexthethunderboy/thegriot",
+    notes: {
+      aim: "Explore how geographic context connects historical accounts and oral traditions.",
+      approach: "An interactive globe presents location-based narratives alongside an experimental ingestion pipeline.",
+      scope: "Prototype only. A tracked migration disables row-level security; authorization and ingestion require further review before a production release."
+    }
+  },
 {
   "title": "Dumami Hair",
   "oneLiner": "An editorial hair-styling website with a four-step booking prototype.",

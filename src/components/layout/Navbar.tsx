@@ -22,6 +22,13 @@ export default function Navbar() {
   useEffect(() => {
     if (!isOpen) return;
 
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsOpen(false);
+    };
+    desktop.addEventListener("change", closeOnDesktop);
+    closeOnDesktop();
+
     const main = document.querySelector("main");
     const footer = document.querySelector("footer");
     const previousOverflow = document.body.style.overflow;
@@ -62,6 +69,7 @@ export default function Navbar() {
       main?.removeAttribute("inert");
       footer?.removeAttribute("inert");
       window.removeEventListener("keydown", handleKeyDown);
+      desktop.removeEventListener("change", closeOnDesktop);
     };
   }, [isOpen]);
 
@@ -75,7 +83,7 @@ export default function Navbar() {
             width={170}
             height={34}
             priority
-            className="h-auto w-[122px] sm:w-[138px]"
+            className="h-auto w-[128px] sm:w-[138px]"
           />
         </Link>
 
