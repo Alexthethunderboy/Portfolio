@@ -9,7 +9,7 @@ export function toProjectId(title: string) {
 const PROJECT_SUMMARIES: Record<string, string> = {
   taxable: "A Nigerian tax calculator, SME checker, and private document vault.",
   thunderweather: "A weather dashboard with forecasts, maps, and clear data visualisations.",
-  thegriot: "An interactive globe for exploring history, oral traditions, and contested narratives.",
+  thegriot: "A geographic-history exploration prototype with an interactive globe.",
   cinechive: "A local-first archive for discovering and collecting cinema.",
   drawn: "A culture picker for films, music, and books.",
   "kan powers": "A service enquiry website for property maintenance and facility support.",

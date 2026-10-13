@@ -45,7 +45,7 @@ export default function ContactPage() {
               Email is best if you already have a brief, references, or a few links to share.
             </p>
 
-            <div className="mt-10 hidden border-t border-white/10 pt-6 lg:block">
+            <div className="mt-10 border-t border-white/10 pt-6">
               <p className="text-sm text-white/65">Elsewhere</p>
               <div className="mt-4 flex flex-col items-start gap-4">
                 <a href={SITE.github} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center gap-3 font-bold text-white/[0.72] hover:text-white">

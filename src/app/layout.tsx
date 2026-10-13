@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     "Kelechi Alexander Ugoh",
     "Alex",
     "creative technologist",
+    "cybersecurity learning",
+    "application security",
+    "AppSec",
     "creative direction",
     "visual identity",
     "front-end engineering",
@@ -40,7 +43,7 @@ export const metadata: Metadata = {
         url: `${SITE.url}/brand/social/thunderboy-share.png`,
         width: 1200,
         height: 630,
-        alt: "Thunderboy — Creative Technologist. Digital products, visual identity & code.",
+        alt: SITE.socialImageAlt,
         type: "image/png",
       },
     ],
@@ -51,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} — ${SITE.descriptor}`,
     description: SITE.description,
-    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, alt: "Thunderboy — Creative Technologist" }],
+    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, alt: SITE.socialImageAlt }],
   },
 };
 
@@ -63,7 +66,7 @@ const structuredData = {
   url: SITE.url,
   description: SITE.description,
   email: `mailto:${SITE.email}`,
-  jobTitle: SITE.descriptor,
+  jobTitle: "Developer",
   sameAs: [SITE.github, SITE.linkedin],
 };
 

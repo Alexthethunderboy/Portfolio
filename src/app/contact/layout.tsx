@@ -3,16 +3,16 @@ import { SITE } from '@/data/site';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Contact creative technologist Kelechi Alexander Ugoh about a project, idea, or collaboration.',
+  description: SITE.description,
   alternates: { canonical: `${SITE.url}/contact` },
   openGraph: {
-    title: 'Contact — Thunderboy', description: 'Contact creative technologist Kelechi Alexander Ugoh about a project, idea, or collaboration.',
+    title: 'Contact — Thunderboy', description: SITE.description,
     url: `${SITE.url}/contact`, siteName: SITE.name, type: 'website', locale: 'en_NG',
-    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, width: 1200, height: 630, type: 'image/png', alt: 'Thunderboy — Creative Technologist' }],
+    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, width: 1200, height: 630, type: 'image/png', alt: SITE.socialImageAlt }],
   },
   twitter: {
-    card: 'summary_large_image', title: 'Contact — Thunderboy', description: 'Contact creative technologist Kelechi Alexander Ugoh about a project, idea, or collaboration.',
-    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, alt: 'Thunderboy — Creative Technologist' }],
+    card: 'summary_large_image', title: 'Contact — Thunderboy', description: SITE.description,
+    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, alt: SITE.socialImageAlt }],
   },
 };
 
