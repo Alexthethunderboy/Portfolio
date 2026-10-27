@@ -42,7 +42,7 @@ export default function AboutPage() {
           <div className="lg:col-span-4 lg:col-start-9">
             <div className="relative mx-auto aspect-[4/4.5] sm:aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-white/[0.12] bg-white/[0.04]">
               <Image
-                src="/assets/profile-pic.jpg"
+                src="/assets/profile-pic.webp"
                 alt="Kelechi Alexander Ugoh"
                 fill
                 priority
