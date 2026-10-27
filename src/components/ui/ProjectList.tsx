@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Github } from "lucide-react";
 import type { Project } from "@/data/portfolio";
-import { getProjectSummary, getShortTechLabel, toProjectId } from "@/lib/project";
+import { getCaseStudyHref, getProjectSummary, getShortTechLabel, toProjectId } from "@/lib/project";
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
@@ -23,6 +23,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
             {projects.map((project, index) => {
               const projectTitle = project.title.trim();
               const isWide = false;
+              const caseStudyHref = getCaseStudyHref(project);
               const technologies = project.techStack
                 .flatMap(value => getShortTechLabel(value).split(","))
                 .map(value => value.trim())
@@ -76,6 +77,11 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
                         </details>
                       )}
                       <div className="mt-5 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2">
+                        {caseStudyHref && (
+                          <Link href={caseStudyHref} aria-label={`Read the ${projectTitle} case study`} className="button-primary min-[360px]:col-span-2">
+                            Case study <ArrowUpRight aria-hidden="true" size={16} />
+                          </Link>
+                        )}
                         {project.liveUrl && (
                           <a href={project.liveUrl} aria-label={`View ${projectTitle} live site`} target="_blank" rel="noopener noreferrer" className="button-primary">
                             Live site <ArrowUpRight aria-hidden="true" size={16} />

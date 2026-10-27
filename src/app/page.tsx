@@ -6,7 +6,7 @@ import ProjectGrid from "@/components/layout/ProjectGrid";
 import TechStack from "@/components/layout/TechStack";
 import { getProjects } from "@/lib/get-projects";
 import { SITE } from "@/data/site";
-import { getProjectSummary, getShortTechLabel } from "@/lib/project";
+import { getCaseStudyHref, getProjectSummary, getShortTechLabel, toProjectId } from "@/lib/project";
 
 export const revalidate = 60;
 
@@ -22,6 +22,7 @@ async function getSelectedProjects() {
     description: getProjectSummary(project.title, project.oneLiner || project.description),
     tags: project.techStack.flatMap(value => getShortTechLabel(value).split(",")).map(value => value.trim()).filter(Boolean),
     thumbnail: project.thumbnail,
+    href: getCaseStudyHref(project) || `/projects#${toProjectId(project.title)}`,
   }));
 }
 
