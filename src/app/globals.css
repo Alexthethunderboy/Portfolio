@@ -2,30 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "League Spartan";
-  src: url("/brand/fonts/LeagueSpartan-wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "IBM Plex Mono";
-  src: url("/brand/fonts/IBMPlexMono-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-display: swap;
-}
-
 :root {
   --tb-carbon: #050505;
   --tb-voltage: #ffd400;
   --tb-white: #ffffff;
-  --tb-muted: #a9a9b3;
-  --tb-storm-blue: #111a2e;
-  --tb-voltage-violet: #261a3b;
-  --tb-night-green: #0e201d;
-  --font-display: "League Spartan";
-  --font-mono: "IBM Plex Mono";
+  --tb-warm-ground: #eeeae2;
+  --tb-graphite: #5b5d5c; /* secondary text on light grounds */
+  --tb-graphite-light: #8c8e8d; /* secondary text on Carbon */
+  --tb-storm-blue: #111a2e; /* flat field only, never a gradient */
   --tb-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -81,25 +65,14 @@ textarea {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 78% 26%, rgba(255, 212, 0, 0.15), transparent 28rem),
-    radial-gradient(circle at 12% 18%, rgba(255, 188, 0, 0.09), transparent 24rem),
-    radial-gradient(circle at 48% 88%, rgba(255, 212, 0, 0.075), transparent 32rem),
-    #050505;
+  background: var(--tb-carbon);
 }
 
-.cosmic-background canvas,
-.cosmic-vignette {
+.cosmic-background canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-}
-
-.cosmic-vignette {
-  background:
-    radial-gradient(ellipse at center, transparent 20%, rgba(5, 5, 5, 0.12) 60%, rgba(5, 5, 5, 0.72) 100%),
-    linear-gradient(to bottom, rgba(5, 5, 5, 0.06), rgba(5, 5, 5, 0.35));
 }
 
 .hero-title-stage {
@@ -140,8 +113,8 @@ textarea {
 
 .meta-label {
   font-family: var(--font-mono), Menlo, Consolas, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.11em;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
   line-height: 1.5;
   text-transform: uppercase;
 }
@@ -177,12 +150,8 @@ textarea {
 }
 
 .cosmic-hero {
-  border-color: rgba(255, 212, 0, 0.16);
-  background: linear-gradient(145deg, rgba(5, 5, 5, 0.56), rgba(5, 5, 5, 0.24));
-  box-shadow:
-    0 28px 90px rgba(0, 0, 0, 0.42),
-    0 0 80px rgba(255, 212, 0, 0.035),
-    inset 0 1px rgba(255, 234, 130, 0.12);
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(5, 5, 5, 0.72);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -271,7 +240,7 @@ textarea {
   }
 }
 
-/* Quiet surfaces keep the existing cosmic identity behind the content. */
+/* Quiet surfaces sit on a flat Carbon field with a sparse star layer. */
 .surface-panel {
   min-width: 0;
   border: 1px solid rgb(255 255 255 / .12);

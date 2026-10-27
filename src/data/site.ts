@@ -11,6 +11,14 @@ export const SITE = {
   linkedin: "https://linkedin.com/in/kelechiugoh",
 } as const;
 
+export const SHARE_IMAGE = {
+  url: `${SITE.url}/brand/social/thunderboy-og-1200x630.png`,
+  width: 1200,
+  height: 630,
+  type: "image/png",
+  alt: "thunderboy wordmark on Voltage Yellow. Built to feel exceptional. Engineered to hold up.",
+} as const;
+
 export const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Work" },
