@@ -1,14 +1,14 @@
 // Genuine CMS previews and live-site captures, verified 8 October 2026.
 export const PROJECT_PREVIEWS: Record<string, string> = {
-  "dirdeo": "/projects/previews/dirdeo.jpg",
-  "ace-in-art": "/projects/previews/aceinart.jpg",
-  "dumami-hair": "/projects/previews/dumamihair.jpg",
-  "alienmint": "/projects/previews/alienmint.jpg",
-  "shopper": "/projects/previews/shopper.jpg",
-  "drawn": "/projects/previews/drawn.jpg",
+  "dirdeo": "/projects/previews/dirdeo.webp",
+  "ace-in-art": "/projects/previews/aceinart.webp",
+  "dumami-hair": "/projects/previews/dumamihair.webp",
+  "alienmint": "/projects/previews/alienmint.webp",
+  "shopper": "/projects/previews/shopper.webp",
+  "drawn": "/projects/previews/drawn.webp",
   "cinechive": "/projects/previews/cinechive.webp",
   "thegriot": "/projects/previews/thegriot.webp",
-  "kan-powers": "/projects/previews/kan-powers.jpg",
+  "kan-powers": "/projects/previews/kan-powers.webp",
   "taxable": "/projects/previews/taxable.webp",
   "thunderweather": "/projects/previews/thunderweather.webp",
   "the-thunderspace": "/projects/previews/thunderspace.webp"
