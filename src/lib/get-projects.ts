@@ -1,7 +1,8 @@
+import { cache } from "react";
 import type { Project } from "@/data/portfolio";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
-import { toProjectId } from "@/lib/project";
+import { hasCaseStudy, toProjectId } from "@/lib/project";
 import { PROJECT_PREVIEWS, PROJECT_FALLBACKS } from "@/data/project-previews";
 
 interface SanityProject {
@@ -152,7 +153,7 @@ export function mergeProjects(existing: Project[]): Project[] {
   });
 }
 
-export async function getProjects(): Promise<Project[]> {
+async function loadProjects(): Promise<Project[]> {
   let rows: SanityProject[] = PROJECT_FALLBACKS;
   try { rows = await client.fetch<SanityProject[]>(`*[_type == "project"] | order(_createdAt desc) { _id, title, oneLiner, description, techStack, liveUrl, githubUrl, thumbnail, star }`); }
   catch { /* Curated repository-backed projects remain available when the CMS cannot load. */ }
@@ -164,4 +165,15 @@ export async function getProjects(): Promise<Project[]> {
     thumbnail: p.thumbnail ? urlForImage(p.thumbnail).width(1200).fit("max").format("webp").url() : "",
     star: { situation: p.star?.situation || "", task: p.star?.task || "", action: p.star?.action || "", result: p.star?.result || "" }
   })));
+}
+
+// Shared per request so a page and its metadata make one CMS call.
+export const getProjects = cache(loadProjects);
+
+export async function getCaseStudies(): Promise<Project[]> {
+  return (await getProjects()).filter(hasCaseStudy);
+}
+
+export async function getCaseStudy(slug: string): Promise<Project | undefined> {
+  return (await getCaseStudies()).find(project => toProjectId(project.title) === slug);
 }

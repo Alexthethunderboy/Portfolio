@@ -1,9 +1,19 @@
+import type { Project } from "@/data/portfolio";
+
 export function toProjectId(title: string) {
   return title
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+}
+
+export function hasCaseStudy(project: Project) {
+  return Object.values(project.star).some(value => value.trim().length > 0);
+}
+
+export function getCaseStudyHref(project: Project) {
+  return hasCaseStudy(project) ? `/work/${toProjectId(project.title)}` : "";
 }
 
 const PROJECT_SUMMARIES: Record<string, string> = {

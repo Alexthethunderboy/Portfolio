@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { toProjectId } from "@/lib/project";
 
 interface ProjectSummary {
   title: string;
   description: string;
   tags: string[];
   thumbnail: string;
+  href: string;
 }
 
 export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }) {
@@ -29,7 +29,7 @@ export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }
             {projects.map((project) => (
               <Link
                 key={project.title}
-                href={`/projects#${toProjectId(project.title)}`}
+                href={project.href}
                 className="surface-panel group flex min-w-0 flex-col overflow-hidden rounded-[1.5rem]"
               >
                 {project.thumbnail ? (
