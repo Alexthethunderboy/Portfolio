@@ -1,11 +1,35 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CosmicBackground from "@/components/layout/CosmicBackground";
-import { SITE } from "@/data/site";
+import { SHARE_IMAGE, SITE } from "@/data/site";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+const leagueSpartan = localFont({
+  src: "../fonts/LeagueSpartan-wght.woff2",
+  weight: "100 900",
+  display: "swap",
+  variable: "--font-display",
+  fallback: ["Arial Black", "Arial", "sans-serif"],
+});
+
+const plexMono = localFont({
+  src: [
+    { path: "../fonts/IBMPlexMono-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/IBMPlexMono-Medium.woff2", weight: "500", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-mono",
+  fallback: ["Menlo", "Consolas", "monospace"],
+});
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  colorScheme: "dark",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -35,15 +59,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,
-    images: [
-      {
-        url: `${SITE.url}/brand/social/thunderboy-share.png`,
-        width: 1200,
-        height: 630,
-        alt: "Thunderboy — Creative Technologist. Digital products, visual identity & code.",
-        type: "image/png",
-      },
-    ],
+    images: [SHARE_IMAGE],
     locale: "en_NG",
     type: "website",
   },
@@ -51,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} — ${SITE.descriptor}`,
     description: SITE.description,
-    images: [{ url: `${SITE.url}/brand/social/thunderboy-share.png`, alt: "Thunderboy — Creative Technologist" }],
+    images: [{ url: SHARE_IMAGE.url, alt: SHARE_IMAGE.alt }],
   },
 };
 
@@ -69,7 +85,7 @@ const structuredData = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${leagueSpartan.variable} ${plexMono.variable}`}>
       <body className="atmosphere">
         <CosmicBackground />
         <a className="skip-link" href="#main-content">

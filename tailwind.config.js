@@ -11,10 +11,12 @@ module.exports = {
         carbon: '#050505',
         voltage: '#FFD400',
         warm: '#EEEAE2',
-        graphite: '#6E706F',
-        storm: '#111A2E',
-        violet: '#261A3B',
-        night: '#0E201D',
+        white: '#FFFFFF',
+        graphite: {
+          DEFAULT: '#5B5D5C', // secondary text on light grounds
+          light: '#8C8E8D', // secondary text on Carbon
+        },
+        storm: '#111A2E', // flat field only
       },
       fontFamily: {
         display: ['var(--font-display)', 'Arial Black', 'Arial', 'sans-serif'],
