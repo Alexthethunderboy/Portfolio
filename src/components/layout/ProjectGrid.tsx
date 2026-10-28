@@ -15,25 +15,28 @@ export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }
     <section aria-labelledby="selected-work-heading" className="py-12 md:py-16">
       <div className="site-shell">
         <div className="mx-auto mb-8 max-w-2xl sm:mb-12 text-center">
-          <p className="meta-label text-voltage">Selected work</p>
+          <p className="meta-label text-voltage">Client work</p>
           <h2 id="selected-work-heading" className="display-heading mt-4 text-[clamp(2.25rem,5vw,4rem)]">
-            A few things I&apos;ve built.
+            Built for clients.
           </h2>
           <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
-            Products, experiments, and personal projects across design and technology.
+            Sites I&apos;ve designed and built for other people. Personal builds live in the Lab.
           </p>
         </div>
 
         {projects.length > 0 ? (
           <div className="grid gap-5 md:grid-cols-2">
-            {projects.map((project) => (
+            {projects.map((project, index) => {
+              // An odd count lets the lead project span the row so the grid closes cleanly.
+              const isLead = index === 0 && projects.length % 2 === 1;
+              return (
               <Link
                 key={project.title}
                 href={`/projects#${toProjectId(project.title)}`}
-                className="surface-panel group flex min-w-0 flex-col overflow-hidden rounded-[1.5rem]"
+                className={`surface-panel group flex min-w-0 flex-col overflow-hidden rounded-[1.5rem] ${isLead ? "md:col-span-2" : ""}`}
               >
                 {project.thumbnail ? (
-                  <div className="relative aspect-[16/9] bg-storm"><Image src={project.thumbnail} alt={`${project.title} project preview`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-top" /></div>
+                  <div className={`relative bg-storm ${isLead ? "aspect-[16/9] md:aspect-[21/9]" : "aspect-[16/9]"}`}><Image src={project.thumbnail} alt={`${project.title} project preview`} fill sizes={isLead ? "100vw" : "(min-width: 768px) 50vw, 100vw"} className="object-cover object-top" /></div>
                 ) : (
                   <div className="flex aspect-[16/9] items-center justify-center border-b border-white/10 bg-storm px-6"><span className="font-display text-4xl font-bold text-white/80">{project.title}</span></div>
                 )}
@@ -56,7 +59,8 @@ export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }
                 )}
               </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="glass-panel rounded-[1.75rem] p-8 text-center">
@@ -67,7 +71,7 @@ export default function ProjectGrid({ projects }: { projects: ProjectSummary[] }
 
         <div className="mt-10 flex justify-center">
           <Link href="/projects" className="button-secondary">
-            See all projects <ArrowUpRight aria-hidden="true" size={16} />
+            See all work and the Lab <ArrowUpRight aria-hidden="true" size={16} />
           </Link>
         </div>
       </div>

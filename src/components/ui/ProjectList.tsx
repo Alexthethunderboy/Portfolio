@@ -2,7 +2,84 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Github } from "lucide-react";
 import type { Project } from "@/data/portfolio";
-import { getProjectSummary, getShortTechLabel, toProjectId } from "@/lib/project";
+import { getProjectSummary, getShortTechLabel, isClientWork, toProjectId } from "@/lib/project";
+
+const GROUPS = [
+  { id: "client-work", client: true, label: "Client work", title: "Built for clients.", intro: "Sites designed and built for other people and their businesses." },
+  { id: "lab", client: false, label: "Lab", title: "Personal builds.", intro: "Experiments and products I make to test ideas and learn something new." },
+] as const;
+
+function ProjectCard({ project, priority }: { project: Project; priority: boolean }) {
+  const projectTitle = project.title.trim();
+  const isWide = false;
+  const technologies = project.techStack
+    .flatMap(value => getShortTechLabel(value).split(","))
+    .map(value => value.trim())
+    .filter(Boolean)
+    .slice(0, 4);
+
+  return (
+    <article
+      id={toProjectId(projectTitle)}
+      className={`surface-panel min-w-0 scroll-mt-28 overflow-hidden rounded-[1.75rem] ${isWide ? "md:col-span-2" : ""}`}
+    >
+      <div className={`relative overflow-hidden bg-storm ${isWide ? "aspect-[16/8]" : "aspect-[16/9]"}`}>
+        {project.thumbnail ? <Image
+          src={project.thumbnail}
+          alt={`${projectTitle} project preview`}
+          fill
+          priority={priority && Boolean(project.thumbnail)}
+          sizes={isWide ? "(min-width: 768px) 76rem, 100vw" : "(min-width: 768px) 38rem, 100vw"}
+          className="object-cover object-top transition-transform duration-700 ease-tb-out hover:scale-[1.02]"
+        /> : <div className="flex h-full items-center justify-center px-6"><span className="font-display text-4xl font-bold text-white/80">{projectTitle}</span></div>}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-carbon/15 via-transparent to-transparent" />
+      </div>
+
+      <div className={`p-5 sm:p-8 ${isWide ? "md:grid md:grid-cols-12 md:gap-8" : ""}`}>
+        <div className={isWide ? "md:col-span-5" : ""}>
+          <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">{projectTitle}</h2>
+          {technologies.length > 0 && (
+            <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${projectTitle} technologies`}>
+              {technologies.map((technology) => (
+                <li key={technology} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/70">
+                  {technology}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className={`mt-5 sm:mt-7 ${isWide ? "md:col-span-7 md:mt-0" : ""}`}>
+          <p className="text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
+            {getProjectSummary(projectTitle, project.oneLiner || project.description)}
+          </p>
+          {project.notes && (
+            <details className="group mt-6 border-t border-white/15 pt-4">
+              <summary className="flex min-h-11 cursor-pointer items-center justify-between font-bold text-voltage">Project notes <span aria-hidden="true" className="text-xl transition-transform group-open:rotate-45">+</span></summary>
+              <dl className="mt-5 space-y-5 text-sm leading-7 text-white/70">
+                {[ ["Aim", project.notes.aim], ["Approach", project.notes.approach], ["Scope", project.notes.scope] ].map(([label, body]) => (
+                  <div key={label}><dt className="font-bold text-white">{label}</dt><dd className="mt-1">{body}</dd></div>
+                ))}
+              </dl>
+            </details>
+          )}
+          <div className="mt-5 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2">
+            {project.liveUrl && (
+              <a href={project.liveUrl} aria-label={`View ${projectTitle} live site`} target="_blank" rel="noopener noreferrer" className="button-primary">
+                Live site <ArrowUpRight aria-hidden="true" size={16} />
+              </a>
+            )}
+            {project.githubUrl && (
+              <a href={project.githubUrl} aria-label={`View ${projectTitle} source code`} target="_blank" rel="noopener noreferrer" className="button-secondary">
+                <Github aria-hidden="true" size={16} /> Source
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
@@ -18,82 +95,26 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
       </section>
 
       {projects.length > 0 ? (
-        <section aria-label="Projects" className="pb-16 md:pb-24">
-          <div className="site-shell grid gap-5 md:grid-cols-2">
-            {projects.map((project, index) => {
-              const projectTitle = project.title.trim();
-              const isWide = false;
-              const technologies = project.techStack
-                .flatMap(value => getShortTechLabel(value).split(","))
-                .map(value => value.trim())
-                .filter(Boolean)
-                .slice(0, 4);
-
-              return (
-                <article
-                  key={project.id}
-                  id={toProjectId(projectTitle)}
-                  className={`surface-panel min-w-0 scroll-mt-28 overflow-hidden rounded-[1.75rem] ${isWide ? "md:col-span-2" : ""}`}
-                >
-                  <div className={`relative overflow-hidden bg-storm ${isWide ? "aspect-[16/8]" : "aspect-[16/9]"}`}>
-                    {project.thumbnail ? <Image
-                      src={project.thumbnail}
-                      alt={`${projectTitle} project preview`}
-                      fill
-                      priority={index === 0 && Boolean(project.thumbnail)}
-                      sizes={isWide ? "(min-width: 768px) 76rem, 100vw" : "(min-width: 768px) 38rem, 100vw"}
-                      className="object-cover object-top transition-transform duration-700 ease-tb-out hover:scale-[1.02]"
-                    /> : <div className="flex h-full items-center justify-center px-6"><span className="font-display text-4xl font-bold text-white/80">{projectTitle}</span></div>}
-                    <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-carbon/15 via-transparent to-transparent" />
-                  </div>
-
-                  <div className={`p-5 sm:p-8 ${isWide ? "md:grid md:grid-cols-12 md:gap-8" : ""}`}>
-                    <div className={isWide ? "md:col-span-5" : ""}>
-                      <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl">{projectTitle}</h2>
-                      {technologies.length > 0 && (
-                        <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${projectTitle} technologies`}>
-                          {technologies.map((technology) => (
-                            <li key={technology} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/70">
-                              {technology}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-
-                    <div className={`mt-5 sm:mt-7 ${isWide ? "md:col-span-7 md:mt-0" : ""}`}>
-                      <p className="text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
-                        {getProjectSummary(projectTitle, project.oneLiner || project.description)}
-                      </p>
-                      {project.notes && (
-                        <details className="group mt-6 border-t border-white/15 pt-4">
-                          <summary className="flex min-h-11 cursor-pointer items-center justify-between font-bold text-voltage">Project notes <span aria-hidden="true" className="text-xl transition-transform group-open:rotate-45">+</span></summary>
-                          <dl className="mt-5 space-y-5 text-sm leading-7 text-white/70">
-                            {[ ["Aim", project.notes.aim], ["Approach", project.notes.approach], ["Scope", project.notes.scope] ].map(([label, body]) => (
-                              <div key={label}><dt className="font-bold text-white">{label}</dt><dd className="mt-1">{body}</dd></div>
-                            ))}
-                          </dl>
-                        </details>
-                      )}
-                      <div className="mt-5 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2">
-                        {project.liveUrl && (
-                          <a href={project.liveUrl} aria-label={`View ${projectTitle} live site`} target="_blank" rel="noopener noreferrer" className="button-primary">
-                            Live site <ArrowUpRight aria-hidden="true" size={16} />
-                          </a>
-                        )}
-                        {project.githubUrl && (
-                          <a href={project.githubUrl} aria-label={`View ${projectTitle} source code`} target="_blank" rel="noopener noreferrer" className="button-secondary">
-                            <Github aria-hidden="true" size={16} /> Source
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
+        GROUPS.map((group, groupIndex) => {
+          const items = projects.filter(project => isClientWork(project.title) === group.client);
+          if (items.length === 0) return null;
+          return (
+            <section key={group.id} id={group.id} aria-labelledby={`${group.id}-heading`} className="scroll-mt-28 pb-16 md:pb-24">
+              <div className="site-shell">
+                <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-12">
+                  <p className="meta-label text-voltage">{group.label}</p>
+                  <h2 id={`${group.id}-heading`} className="display-heading mt-4 text-[clamp(2.25rem,5vw,4rem)]">{group.title}</h2>
+                  <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg sm:leading-8">{group.intro}</p>
+                </div>
+                <div className="grid gap-5 md:grid-cols-2">
+                  {items.map((project, index) => (
+                    <ProjectCard key={project.id} project={project} priority={groupIndex === 0 && index === 0} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          );
+        })
       ) : (
         <section className="pb-16 md:pb-24">
           <div className="site-shell">

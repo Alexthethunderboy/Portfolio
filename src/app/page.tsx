@@ -6,7 +6,7 @@ import ProjectGrid from "@/components/layout/ProjectGrid";
 import TechStack from "@/components/layout/TechStack";
 import { getProjects } from "@/lib/get-projects";
 import { SITE } from "@/data/site";
-import { getProjectSummary, getShortTechLabel } from "@/lib/project";
+import { getProjectSummary, getShortTechLabel, isClientWork } from "@/lib/project";
 
 export const revalidate = 60;
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 async function getSelectedProjects() {
-  return (await getProjects()).slice(0, 4).map(project => ({
+  return (await getProjects()).filter(project => isClientWork(project.title)).slice(0, 3).map(project => ({
     title: project.title,
     description: getProjectSummary(project.title, project.oneLiner || project.description),
     tags: project.techStack.flatMap(value => getShortTechLabel(value).split(",")).map(value => value.trim()).filter(Boolean),

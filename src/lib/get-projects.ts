@@ -1,7 +1,7 @@
 import type { Project } from "@/data/portfolio";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
-import { toProjectId } from "@/lib/project";
+import { CLIENT_WORK, LAB_WORK, toProjectId } from "@/lib/project";
 import { PROJECT_PREVIEWS, PROJECT_FALLBACKS } from "@/data/project-previews";
 
 interface SanityProject {
@@ -143,9 +143,8 @@ export function mergeProjects(existing: Project[]): Project[] {
     if (index >= 0) projects[index] = { ...projects[index], ...item };
     else projects.push({ id: toProjectId(item.title), thumbnail: "", star: { situation: "", task: "", action: "", result: "" }, ...item });
   }
-  // Editorial order: demonstrated scope and distinctive interaction, then visual execution.
-  // Prototype/payment limitations remain documented in each project's notes.
-  const featured = ["cinechive", "drawn", "thegriot", "alienmint", "dumami-hair", "dirdeo", "ace-in-art", "kan-powers", "thunderweather", "shopper", "taxable", "the-thunderspace"];
+  // Client work leads, then personal builds (the Lab). Unlisted projects sort last.
+  const featured = [...CLIENT_WORK, ...LAB_WORK];
   return projects.map(project => ({ ...project, liveUrl: safeProjectUrl(project.liveUrl), githubUrl: safeProjectUrl(project.githubUrl), thumbnail: PROJECT_PREVIEWS[toProjectId(project.title)] || project.thumbnail })).sort((a,b) => {
     const rank = (p: Project) => { const n = featured.indexOf(toProjectId(p.title)); return n < 0 ? featured.length : n; };
     return rank(a) - rank(b) || a.title.localeCompare(b.title);
