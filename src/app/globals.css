@@ -240,7 +240,7 @@ textarea {
   }
 }
 
-/* Quiet surfaces sit on the Carbon fault-line contour field. */
+/* Quiet surfaces sit on the Carbon contour field with its scattered bolt cuts. */
 .surface-panel {
   min-width: 0;
   border: 1px solid rgb(255 255 255 / .12);
