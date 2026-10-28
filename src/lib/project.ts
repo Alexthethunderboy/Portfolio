@@ -6,6 +6,15 @@ export function toProjectId(title: string) {
     .replace(/(^-|-$)/g, "");
 }
 
+// Editorial order within each group. Client work is built for someone else;
+// the Lab holds personal builds and experiments.
+export const CLIENT_WORK = ["dumami-hair", "dirdeo", "ace-in-art", "kan-powers"];
+export const LAB_WORK = ["cinechive", "drawn", "thegriot", "alienmint", "thunderweather", "shopper", "taxable", "the-thunderspace"];
+
+export function isClientWork(title: string) {
+  return CLIENT_WORK.includes(toProjectId(title));
+}
+
 const PROJECT_SUMMARIES: Record<string, string> = {
   taxable: "A Nigerian tax calculator, SME checker, and private document vault.",
   thunderweather: "A weather dashboard with forecasts, maps, and clear data visualisations.",
